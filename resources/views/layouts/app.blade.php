@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>BDR Computer | Administrator</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -39,15 +39,21 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                <a class="navbar-brand" href="{{ url('/admin/home') }}">
+                    BDR Computer Pati
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                <ul class="nav navbar-nav">                    
+                    @if (!Auth::guest())                        
+                        <li><a href="{{ url('/admin/produk') }}">Produk</a></li>
+                        <li><a href="{{ url('/admin/konfirmasi') }}">Konfirmasi</a></li>
+                        <li><a href="{{ url('/admin/testimoni') }}">Testimoni</a></li>
+                        <li><a href="{{ url('/admin/download') }}">Download</a></li>
+                        <li><a href="{{ url('/admin/kami') }}">Tentang Kami</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
