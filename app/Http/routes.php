@@ -35,4 +35,5 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/admin/home', 'HomeController@index');
     Route::resource('/admin/testimoni', 'TestimoniController');
+    Route::resource('/admin/download', 'DownloadController');
 });
