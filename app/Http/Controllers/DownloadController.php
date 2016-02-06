@@ -49,9 +49,16 @@ class DownloadController extends Controller
         $path = base_path() . '/public/file/';
         $request->file('image')->move($path , $imageName);
 
-        $request->file_download = $imageName;
-        $down = $request->all();        
-        Download::create($down);
+        $down = new Download;
+        $down->nama_download = $request->nama_download;
+        $down->file_download = $imageName;
+        
+        if($down->save()){
+            $request->session()->flash('message', 'success|Sukses');
+        }else{
+            $request->session()->flash('message', 'info|Maaf Gagal');
+        }
+                
         return redirect('admin/download');
     }
 

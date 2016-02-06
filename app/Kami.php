@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Konfirmasi extends Model
+class Kami extends Model
 {
-    //
+    protected $primaryKey = "id_kami";
 }

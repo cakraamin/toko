@@ -36,4 +36,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/admin/home', 'HomeController@index');
     Route::resource('/admin/testimoni', 'TestimoniController');
     Route::resource('/admin/download', 'DownloadController');
+    Route::get('/admin/kami', 'KamiController@index');
+    Route::post('/admin/kami', 'KamiController@create');
 });
