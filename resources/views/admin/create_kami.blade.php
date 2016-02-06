@@ -7,28 +7,29 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Download</div>
                 <div class="panel-body">                        
-                    {!! Form::open(['url' => 'admin/download','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Nama File</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="nama_download">                                
-
-                                @if ($errors->has('nama_download'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('nama_download') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                    {!! Form::open(['url' => 'admin/kami','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}                        
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">File Download</label>
+                            <label class="col-md-4 control-label">Gambar Tentang Kami</label>
 
                             <div class="col-md-6">                                
                                 {!! Form::file('image', null) !!}
                             </div>
-                        </div>                                                
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Deskripsi</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="deskripsi">                                
+
+                                @if ($errors->has('deskripsi'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('deskripsi') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

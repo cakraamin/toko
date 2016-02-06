@@ -77,7 +77,7 @@
             </div>
         </div>
     </nav>
-
+    {!! Messages::display() !!}    
     @yield('content')
 
     <!-- JavaScripts -->
