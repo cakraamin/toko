@@ -160,6 +160,11 @@ return [
 		form
         */
         Collective\Html\HtmlServiceProvider::class,
+
+        /*
+        Helper Provider
+        */
+        App\Providers\HelperServiceProvider::class,
     ],
 
     /*
@@ -208,6 +213,8 @@ return [
 
         'Form' 		=> Collective\Html\FormFacade::class,
       	'Html' 		=> Collective\Html\HtmlFacade::class,
+
+        'Messages'  => App\Helpers\Messages::class,
     ],
 
 ];
