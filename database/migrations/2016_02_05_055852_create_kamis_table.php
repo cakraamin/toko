@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTestimonisTable extends Migration
+class CreateKamisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ class CreateTestimonisTable extends Migration
      */
     public function up()
     {
-        Schema::create('testimonis', function (Blueprint $table) {
-            $table->increments('id_testimoni');
-            $table->string('nama',100);
-            $table->string('instansi',100);
-            $table->longText('teks_testimoni');
+        Schema::create('kamis', function (Blueprint $table) {
+            $table->increments('id_kami');
+            $table->text('deskripsi');
+            $table->string('gambar_kami',200);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateTestimonisTable extends Migration
      */
     public function down()
     {
-        Schema::drop('testimonis');
+        Schema::drop('kamis');
     }
 }
