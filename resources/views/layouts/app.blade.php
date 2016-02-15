@@ -47,8 +47,16 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">                    
-                    @if (!Auth::guest())                        
-                        <li><a href="{{ url('/admin/produk') }}">Produk</a></li>
+                    @if (!Auth::guest())    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Product <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/admin/brand') }}">Brand</a></li>
+                                <li><a href="{{ url('/admin/categori') }}">Categori</a></li>
+                                <li><a href="{{ url('/admin/product') }}">Product</a></li>
+                            </ul>
+                        </li>                    
+                        <li><a href="{{ url('/admin/transaksi') }}">Transaksi</a></li>
                         <li><a href="{{ url('/admin/konfirmasi') }}">Konfirmasi</a></li>
                         <li><a href="{{ url('/admin/testimoni') }}">Testimoni</a></li>
                         <li><a href="{{ url('/admin/download') }}">Download</a></li>
