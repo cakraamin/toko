@@ -40,19 +40,18 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_download' => 'required|max:200',
+            'nama_brand' => 'required|max:200',
         ]);
-
-        $imageTempName = $request->file('image')->getPathname();
+        
         $imageName = $request->file('image')->getClientOriginalName();
-        $path = base_path() . '/public/file/';
+        $path = public_path(). '/public/gambar/';
         $request->file('image')->move($path , $imageName);
 
         $brand = new Brand;
-        $down->nama_brand = $request->nama_brand;
-        $down->logo_brand = $imageName;
+        $brand->nama_brand = $request->nama_brand;
+        $brand->logo_brand = $imageName;
         
-        if($down->save()){
+        if($brand->save()){
             $request->session()->flash('message', 'success|Sukses');
         }else{
             $request->session()->flash('message', 'info|Maaf Gagal');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Categori;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -41,17 +42,16 @@ class CategoriController extends Controller
         $this->validate($request, [
             'nama_categori' => 'required|max:200',
         ]);
-
-        $imageTempName = $request->file('image')->getPathname();
+        
         $imageName = $request->file('image')->getClientOriginalName();
-        $path = base_path() . '/public/file/';
+        $path = public_path(). '/public/gambar/';
         $request->file('image')->move($path , $imageName);
 
         $categori = new Categori;
         $categori->nama_categori = $request->nama_categori;
         $categori->logo_categori = $imageName;
         
-        if($down->save()){
+        if($categori->save()){
             $request->session()->flash('message', 'success|Sukses');
         }else{
             $request->session()->flash('message', 'info|Maaf Gagal');

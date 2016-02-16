@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Product;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -27,7 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.create_categori');
+        return view('admin.create_product');
     }
 
     /**
