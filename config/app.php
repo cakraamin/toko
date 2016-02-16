@@ -165,6 +165,16 @@ return [
         Helper Provider
         */
         App\Providers\HelperServiceProvider::class,
+
+        /*
+        shopping cart
+        */
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+
+        /*
+        breadcrumbs
+        */
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
     ],
 
     /*
@@ -215,6 +225,10 @@ return [
       	'Html' 		=> Collective\Html\HtmlFacade::class,
 
         'Messages'  => App\Helpers\Messages::class,
+
+        'Cart'      => Gloudemans\Shoppingcart\Facades\Cart::class,
+
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
     ],
 
 ];
