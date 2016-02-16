@@ -23,6 +23,34 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-md-4 control-label">Brand Product</label>
+
+                            <div class="col-md-6">
+                                {{ Form::select('brand', $data['brand']) }}
+
+                                @if ($errors->has('nama_product'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('nama_product') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Categori Product</label>
+
+                            <div class="col-md-6">
+                                {{ Form::select('categori', $data['categori']) }}
+
+                                @if ($errors->has('nama_product'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('nama_product') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-md-4 control-label">Gambar Product</label>
 
                             <div class="col-md-6">                                

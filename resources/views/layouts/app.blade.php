@@ -60,6 +60,7 @@
                         <li><a href="{{ url('/admin/konfirmasi') }}">Konfirmasi</a></li>
                         <li><a href="{{ url('/admin/testimoni') }}">Testimoni</a></li>
                         <li><a href="{{ url('/admin/download') }}">Download</a></li>
+                        <li><a href="{{ url('/admin/banner') }}">Banner</a></li>
                         <li><a href="{{ url('/admin/kami') }}">Tentang Kami</a></li>
                     @endif
                 </ul>
