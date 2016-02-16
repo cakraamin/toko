@@ -14,7 +14,6 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', 'MainController@index');
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +26,13 @@ Route::get('/', 'MainController@index');
 |
 */
 
+Route::group(['middleware' => 'web'], function () {    
+    Route::get('/', 'MainController@index');
+    Route::get('/cart', 'MainController@cart');
+    Route::get('/testimoni', 'MainController@testimoni');
+    Route::get('/tentang_kami', 'MainController@kami');
+});
+
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
@@ -38,4 +44,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/admin/brand', 'BrandController');
     Route::resource('/admin/categori', 'CategoriController');
     Route::resource('/admin/product', 'ProductController');
+    Route::resource('/admin/banner', 'BannerController');
+    Route::get('/admin/transaksi', 'TransaksiController@index');
+    Route::get('/admin/konfirmasi', 'KonfirmasiController@index');
 });

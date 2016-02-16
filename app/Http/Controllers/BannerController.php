@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Product;
-use App\Brand;
-use App\Categori;
+use App\Banner;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class ProductController extends Controller
+class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-         $product = Product::all();        
-        return view('admin.product',compact('product'));
+        $banner = Banner::all();        
+        return view('admin.banner',compact('banner'));
     }
 
     /**
@@ -30,12 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $data = array(
-            'brand'     => Brand::lists('nama_brand', 'id_brand'),
-            'categori'  => Categori::lists('nama_kategori', 'id_kategori')
-        );
-
-        return view('admin.create_product',compact('data'));
+        return view('admin.create_banner');
     }
 
     /**
@@ -47,25 +40,24 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_download' => 'required|max:200',
+            'nama_brand' => 'required|max:200',
         ]);
-
-        $imageTempName = $request->file('image')->getPathname();
+        
         $imageName = $request->file('image')->getClientOriginalName();
-        $path = base_path() . '/public/file/';
+        $path = public_path(). '/upload/gambar/';
         $request->file('image')->move($path , $imageName);
 
-        $down = new Download;
-        $down->nama_download = $request->nama_download;
-        $down->file_download = $imageName;
+        $banner = new Banner;
+        $banner->judul_banner = $request->judul_banner;
+        $banner->gambar_banner = "okelah";
         
-        if($down->save()){
+        if($banner->save()){
             $request->session()->flash('message', 'success|Sukses');
         }else{
             $request->session()->flash('message', 'info|Maaf Gagal');
         }
                 
-        return redirect('admin/download');
+        return redirect('admin/banner');
     }
 
     /**
@@ -76,8 +68,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-        return view('admin.show_product',compact('product'));
+        $banner = Banner::find($id);
+        return view('admin.show_banner',compact('banner'));
     }
 
     /**
@@ -88,8 +80,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        return view('admin.edit_product',compact('product')); 
+        $banner = Banner::find($id);
+        return view('admin.edit_banner',compact('banner'));  
     }
 
     /**
@@ -101,10 +93,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $productUpdate = $request->all();
-        $product = Product::find($id);
-        $product->update($productUpdate);
-        return redirect('admin/product');
+        $bannerUpdate = $request->all();
+        $banner = Banner::find($id);
+        $banner->update($brandUpdate);
+        return redirect('admin/banner');
     }
 
     /**
@@ -115,7 +107,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Product::find($id)->delete();
-        return redirect('admin/product');
+        Banner::find($id)->delete();
+        return redirect('admin/banner');
     }
 }

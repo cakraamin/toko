@@ -43,13 +43,13 @@ class BrandController extends Controller
             'nama_brand' => 'required|max:200',
         ]);
         
-        $imageName = $request->file('image')->getClientOriginalName();
-        $path = public_path(). '/public/gambar/';
-        $request->file('image')->move($path , $imageName);
+        // $imageName = $request->file('image')->getClientOriginalName();
+        // $path = public_path(). '/upload/gambar/';
+        // $request->file('image')->move($path , $imageName);
 
         $brand = new Brand;
         $brand->nama_brand = $request->nama_brand;
-        $brand->logo_brand = $imageName;
+        $brand->logo_brand = "okelah";
         
         if($brand->save()){
             $request->session()->flash('message', 'success|Sukses');
