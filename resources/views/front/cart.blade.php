@@ -1,7 +1,7 @@
 @extends('layouts.front')
 
 @section('content')
-    {!! Breadcrumbs::render('home') !!}
+    {!! Breadcrumbs::render('kami') !!}
     <div class="row">
         <ul class="nav nav-pills nav-wizard">
             <li><a href="#" data-toggle="tab">Home</a><div class="nav-arrow"></div></li>

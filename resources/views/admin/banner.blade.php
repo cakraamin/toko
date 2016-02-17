@@ -9,7 +9,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="{{ URL('admin/banner/create') }}"><button class="btn btn-success">New Brand</button></a>
+                            <a href="{{ URL('admin/banner/create') }}"><button class="btn btn-success">New Banner</button></a>
                         </div>
                     </div>
                     <div class="row">

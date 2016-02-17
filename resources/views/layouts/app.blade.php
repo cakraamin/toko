@@ -86,7 +86,7 @@
             </div>
         </div>
     </nav>
-    {!! Messages::display() !!}    
+    @include('flash::message')
     @yield('content')
 
     <!-- JavaScripts -->
