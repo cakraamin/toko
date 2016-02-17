@@ -175,6 +175,11 @@ return [
         breadcrumbs
         */
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+
+        /*
+        messagebox
+        */
+        Laracasts\Flash\FlashServiceProvider::class,
     ],
 
     /*
@@ -229,6 +234,8 @@ return [
         'Cart'      => Gloudemans\Shoppingcart\Facades\Cart::class,
 
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+
+        'Flash'     => Laracasts\Flash\Flash::class
     ],
 
 ];
