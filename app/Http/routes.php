@@ -27,7 +27,8 @@
 */
 
 Route::group(['middleware' => 'web'], function () {    
-    Route::get('/', 'MainController@index');
+    //Route::get('/', 'MainController@index');
+    Route::get('/', ['as' => 'home', 'uses' => 'MainController@index']);
     Route::get('/cart', 'MainController@cart');
     Route::get('/testimoni', 'MainController@testimoni');
     Route::get('/tentang_kami', 'MainController@kami');

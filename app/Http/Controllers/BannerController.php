@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Banner;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class BannerController extends Controller
 {
@@ -39,22 +40,16 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nama_brand' => 'required|max:200',
-        ]);
-        
-        $imageName = $request->file('image')->getClientOriginalName();
-        $path = public_path(). '/upload/gambar/';
-        $request->file('image')->move($path , $imageName);
+        $data['judul_banner'] = $request->judul_banner;
 
-        $banner = new Banner;
-        $banner->judul_banner = $request->judul_banner;
-        $banner->gambar_banner = "okelah";
+        if ($request->hasFile('image')) {
+            $data['gambar_banner'] = $this->savePhoto($request->file('image'));
+        }        
         
-        if($banner->save()){
-            $request->session()->flash('message', 'success|Sukses');
+        if(Banner::create($data)){
+            \Flash::success('File Download Berhasil Disimpan');
         }else{
-            $request->session()->flash('message', 'info|Maaf Gagal');
+            \Flash::info('File Download Gagal Disimpan');
         }
                 
         return redirect('admin/banner');
@@ -109,5 +104,13 @@ class BannerController extends Controller
     {
         Banner::find($id)->delete();
         return redirect('admin/banner');
+    }
+
+    protected function savePhoto(UploadedFile $photo)
+    {
+        $fileName = str_random(40) . '.' . $photo->guessClientExtension();
+        $destinationPath = public_path() . '/upload/banner/';
+        $photo->move($destinationPath, $fileName);
+        return $fileName;
     }
 }

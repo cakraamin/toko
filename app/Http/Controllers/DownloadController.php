@@ -40,26 +40,35 @@ class DownloadController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nama_download' => 'required|max:200',
-        ]);
+        // $this->validate($request, [
+        //     'nama_download' => 'required|max:200',
+        // ]);
 
-        $imageTempName = $request->file('image')->getPathname();
-        $imageName = $request->file('image')->getClientOriginalName();
-        $path = base_path() . '/public/file/';
-        $request->file('image')->move($path , $imageName);
+        // $imageTempName = $request->file('image')->getPathname();
+        // $imageName = $request->file('image')->getClientOriginalName();
+        // $path = base_path() . '/public/file/';
+        // $request->file('image')->move($path , $imageName);
 
-        $down = new Download;
-        $down->nama_download = $request->nama_download;
-        $down->file_download = $imageName;
-        
-        if($down->save()){
-            $request->session()->flash('message', 'success|Sukses');
-        }else{
-            $request->session()->flash('message', 'info|Maaf Gagal');
+        $data['nama_download'] = $request->nama_download;
+
+        if ($request->hasFile('image')) {
+            $data['file_download'] = $this->savePhoto($request->file('image'));
         }
+
+        $download = Download::create($data);
+
+
+        // $down = new Download;
+        // $down->nama_download = $request->nama_download;
+        // $down->file_download = $imageName;
+        
+        // if($down->save()){
+        //     $request->session()->flash('message', 'success|Sukses');
+        // }else{
+        //     $request->session()->flash('message', 'info|Maaf Gagal');
+        // }
                 
-        return redirect('admin/download');
+        return redirect('admin/download');        
     }
 
     /**
@@ -110,6 +119,15 @@ class DownloadController extends Controller
     public function destroy($id)
     {
         Download::find($id)->delete();
+        \Flash::success('File Download Berhasil Dihapus');
         return redirect('admin/download');
+    }
+
+    protected function savePhoto(UploadedFile $photo)
+    {
+        $fileName = str_random(40) . '.' . $photo->guessClientExtension();
+        $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img';
+        $photo->move($destinationPath, $fileName);
+        return $fileName;
     }
 }

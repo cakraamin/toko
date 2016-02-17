@@ -118,4 +118,12 @@ class ProductController extends Controller
         Product::find($id)->delete();
         return redirect('admin/product');
     }
+
+    protected function savePhoto(UploadedFile $photo)
+    {
+        $fileName = str_random(40) . '.' . $photo->guessClientExtension();
+        $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img';
+        $photo->move($destinationPath, $fileName);
+        return $fileName;
+    }
 }

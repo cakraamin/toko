@@ -3,14 +3,14 @@
 // Home
 Breadcrumbs::register('home', function($breadcrumbs)
 {
-    $breadcrumbs->push('Home');
+    $breadcrumbs->push('Home',route('home'));
 });
 
 // Home > About
 Breadcrumbs::register('kami', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Kami');
+    $breadcrumbs->push('Blog');
 });
 
 // Home > Blog
