@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Categori;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CategoriController extends Controller
 {
@@ -40,22 +41,20 @@ class CategoriController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_categori' => 'required|max:200',
+            'nama_kategori' => 'required|max:200',
         ]);
-        
-        $imageName = $request->file('image')->getClientOriginalName();
-        $path = public_path(). '/public/gambar/';
-        $request->file('image')->move($path , $imageName);
 
-        $categori = new Categori;
-        $categori->nama_categori = $request->nama_categori;
-        $categori->logo_categori = $imageName;
+        $data['nama_kategori'] = $request->nama_categori;
+
+        if ($request->hasFile('image')) {
+            $data['logo_kategori'] = $this->savePhoto($request->file('image'));
+        }        
         
-        if($categori->save()){
-            $request->session()->flash('message', 'success|Sukses');
+        if(Categori::create($data)){
+            \Flash::success('Categori Berhasil Disimpan');
         }else{
-            $request->session()->flash('message', 'info|Maaf Gagal');
-        }
+            \Flash::info('Categori Gagal Disimpan');
+        }            
                 
         return redirect('admin/categori');
     }
@@ -93,9 +92,23 @@ class CategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $CategoriUpdate = $request->all();
-        $categori = Categori::find($id);
-        $categori->update($Categori);
+        //$CategoriUpdate = $request->all();
+
+        $categori = Categori::findOrFail($id);
+        //$data = $request->only('name', 'model');
+
+        $data['nama_kategori'] = $request->nama_kategori;
+
+        if ($request->hasFile('image')) {
+            $data['logo_kategori'] = $this->savePhoto($request->file('image'));
+        }        
+
+        if($categori->update($data)){
+            \Flash::success('Categori Berhasil Diupdate');
+        }else{
+            \Flash::info('Categori Gagal Diupdate');
+        }
+
         return redirect('admin/categori');
     }
 
@@ -108,6 +121,15 @@ class CategoriController extends Controller
     public function destroy($id)
     {
         Categori::find($id)->delete();
+        \Flash::success('Categori Berhasil Dihapus');
         return redirect('admin/categori');
+    }
+
+    protected function savePhoto(UploadedFile $photo)
+    {
+        $fileName = str_random(40) . '.' . $photo->guessClientExtension();
+        $destinationPath = public_path() . '/upload/logo/';
+        $photo->move($destinationPath, $fileName);
+        return $fileName;
     }
 }

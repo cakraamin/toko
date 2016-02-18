@@ -9,6 +9,7 @@ use App\Brand;
 use App\Categori;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProductController extends Controller
 {
@@ -19,7 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-         $product = Product::all();        
+        $product = Product::all();        
         return view('admin.product',compact('product'));
     }
 
@@ -47,25 +48,30 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_download' => 'required|max:200',
+            'nama'       => 'required|max:200',
+            'harga'      => 'required|max:200',
+            'keterangan' => 'required',
+            'berat'      => 'required|max:10',
         ]);
 
-        $imageTempName = $request->file('image')->getPathname();
-        $imageName = $request->file('image')->getClientOriginalName();
-        $path = base_path() . '/public/file/';
-        $request->file('image')->move($path , $imageName);
+        $data['nama'] = $request->nama;
+        $data['harga'] = $request->harga;
+        $data['keterangan'] = $request->keterangan;
+        $data['berat'] = $request->berat;
+        $data['id_brand'] = $request->brand;
+        $data['id_kategori'] = $request->categori;
 
-        $down = new Download;
-        $down->nama_download = $request->nama_download;
-        $down->file_download = $imageName;
+        if ($request->hasFile('image')) {
+            $data['gambar'] = $this->savePhoto($request->file('image'));
+        }        
         
-        if($down->save()){
-            $request->session()->flash('message', 'success|Sukses');
+        if(Product::create($data)){
+            \Flash::success('Product Berhasil Disimpan');
         }else{
-            $request->session()->flash('message', 'info|Maaf Gagal');
+            \Flash::info('Product Gagal Disimpan');
         }
                 
-        return redirect('admin/download');
+        return redirect('admin/product');
     }
 
     /**
@@ -88,8 +94,13 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        return view('admin.edit_product',compact('product')); 
+        $data = array(
+            'product'   => Product::find($id),
+            'brand'     => Brand::lists('nama_brand', 'id_brand'),
+            'categori'  => Categori::lists('nama_kategori', 'id_kategori')
+        );
+
+        return view('admin.edit_product',compact('data')); 
     }
 
     /**
@@ -116,13 +127,14 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::find($id)->delete();
+        \Flash::success('Product Berhasil Dihapus');
         return redirect('admin/product');
     }
 
     protected function savePhoto(UploadedFile $photo)
     {
         $fileName = str_random(40) . '.' . $photo->guessClientExtension();
-        $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img';
+        $destinationPath = public_path() . '/upload/gambar/';
         $photo->move($destinationPath, $fileName);
         return $fileName;
     }

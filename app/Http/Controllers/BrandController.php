@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Brand;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class BrandController extends Controller
 {
@@ -41,20 +42,18 @@ class BrandController extends Controller
     {
         $this->validate($request, [
             'nama_brand' => 'required|max:200',
-        ]);
-        
-        // $imageName = $request->file('image')->getClientOriginalName();
-        // $path = public_path(). '/upload/gambar/';
-        // $request->file('image')->move($path , $imageName);
+        ]);    
 
-        $brand = new Brand;
-        $brand->nama_brand = $request->nama_brand;
-        $brand->logo_brand = "okelah";
+        $data['nama_brand'] = $request->nama_brand;
+
+        if ($request->hasFile('image')) {
+            $data['logo_brand'] = $this->savePhoto($request->file('image'));
+        }        
         
-        if($brand->save()){
-            $request->session()->flash('message', 'success|Sukses');
+        if(Brand::create($data)){
+            \Flash::success('Brand Berhasil Disimpan');
         }else{
-            $request->session()->flash('message', 'info|Maaf Gagal');
+            \Flash::info('Brand Gagal Disimpan');
         }
                 
         return redirect('admin/brand');
@@ -93,9 +92,23 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $brandUpdate = $request->all();
-        $brand = Brand::find($id);
-        $brand->update($brandUpdate);
+        //$brandUpdate = $request->all();       
+
+        $brand = Brand::findOrFail($id);
+        //$data = $request->only('name', 'model');
+
+        $data['nama_brand'] = $request->nama_brand;
+
+        if ($request->hasFile('image')) {
+            $data['logo_brand'] = $this->savePhoto($request->file('image'));
+        }        
+
+        if($brand->update($data)){
+            \Flash::success('Brand Berhasil Diupdate');
+        }else{
+            \Flash::info('Brand Gagal Diupdate');
+        }
+
         return redirect('admin/brand');
     }
 
@@ -108,13 +121,14 @@ class BrandController extends Controller
     public function destroy($id)
     {
         Brand::find($id)->delete();
+        \Flash::success('Brand Berhasil Dihapus');
         return redirect('admin/brand');
     }
 
     protected function savePhoto(UploadedFile $photo)
     {
         $fileName = str_random(40) . '.' . $photo->guessClientExtension();
-        $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img';
+        $destinationPath = public_path() . '/upload/logo/';
         $photo->move($destinationPath, $fileName);
         return $fileName;
     }
