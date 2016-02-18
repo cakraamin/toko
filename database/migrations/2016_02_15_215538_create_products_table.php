@@ -16,8 +16,11 @@ class CreateProductsTable extends Migration
             $table->increments('id_product');
             $table->integer('id_brand');
             $table->integer('id_kategori');
+            $table->string('nama',200);
             $table->string('harga',200);
             $table->text('keterangan');
+            $table->string('berat',10);
+            $table->string('gambar',100);
             $table->timestamps();
         });
     }
