@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{!! Form::open(['url' => 'admin/product','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}
+<form class="form-horizontal" role="form">                                        
                         <div class="form-group">
                             <label class="col-md-4 control-label">Nama Product</label>
 
@@ -92,12 +92,12 @@
                             <div class="col-md-6">                                
                                 {!! Form::file('image', null) !!}
                             </div>
-                        </div>                                                
+                        </div>                                                                                                                
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                                <a href="{{ url('/admin/product') }}" class="fa fa-btn fa-sign-in btn btn-primary" >  Back</a>                                
                             </div>
                         </div>                    
-                    {!! Form::close() !!}
+                    </form>
 @endsection

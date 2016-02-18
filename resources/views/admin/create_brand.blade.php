@@ -1,13 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Brand</div>
-                <div class="panel-body">                        
-                    {!! Form::open(['url' => 'admin/brand','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}
+{!! Form::open(['url' => 'admin/brand','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}
                         <div class="form-group">
                             <label class="col-md-4 control-label">Nama Brand</label>
 
@@ -25,19 +19,16 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Logo Brand</label>
 
-                            <div class="col-md-6">                                                                
+                            <div class="col-md-6">     
+                                {!! Form::file('image', null) !!}                                                           
                             </div>
                         </div>                                                
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}
-                            </div>
+                            <div class="col-md-4 col-md-offset-4">
+                                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}                                
+                                <a href="{{ URL('admin/brand') }}" class="btn btn-warning">Cancel</a>
+                            </div>                            
                         </div>                    
                     {!! Form::close() !!}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

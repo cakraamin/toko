@@ -1,26 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-{!! Form::model($brand,['class' => 'form-horizontal','method' => 'PATCH','route'=>['admin.brand.update',$brand->id_brand],'files'=>true]) !!}
+{!! Form::model($categori,['class' => 'form-horizontal','method' => 'PATCH','route'=>['admin.categori.update',$categori->id_kategori],'files'=>true]) !!}
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Nama Brand</label>
+                            <label class="col-md-4 control-label">Nama Kategori</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="nama_brand" value="{{ $brand->nama_brand }}">                                
-                                @if ($errors->has('nama_brand'))
+                                <input type="text" class="form-control" name="nama_kategori" value="{{ $categori->nama_kategori }}">                                
+                                @if ($errors->has('nama_kategori'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('nama_brand') }}</strong>
+                                        <strong>{{ $errors->first('nama_kategori') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Logo Brand</label>
+                            <label class="col-md-4 control-label">Logo Kategori</label>
 
                             <div class="col-md-6">
                                 {!! Form::file('image', null) !!}<br/>
-                                <img src="{{asset('upload/logo/'.$brand->logo_brand)}}" width="300">
+                                <img src="{{asset('upload/logo/'.$categori->logo_kategori)}}" width="300">
                             </div>
                         </div>                                                
 
