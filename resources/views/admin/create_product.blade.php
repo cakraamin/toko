@@ -95,9 +95,10 @@
                         </div>                                                
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                            </div>
+                            <div class="col-md-4 col-md-offset-4">
+                                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}                                
+                                <a href="{{ URL('admin/product') }}" class="btn btn-warning">Cancel</a>
+                            </div> 
                         </div>                    
                     {!! Form::close() !!}
 @endsection

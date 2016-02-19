@@ -1,13 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Banner</div>
-                <div class="panel-body">    
-                    <form class="form-horizontal" role="form">                                        
+<form class="form-horizontal" role="form">                                        
                         <div class="form-group">
                             <label class="col-md-4 control-label">Judul Banner</label>
 
@@ -20,7 +14,7 @@
                             <label class="col-md-4 control-label">Gambar Banner</label>
 
                             <div class="col-md-6">
-                                {!! Form::file('image', null) !!}              {{ $banner->gambar_banner }}           
+                                <img src="{{asset('upload/banner/'.$banner->gambar_banner)}}" width="300">
                             </div>
                         </div>                                                                
 
@@ -30,9 +24,4 @@
                             </div>
                         </div>                    
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

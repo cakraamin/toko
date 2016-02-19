@@ -1,13 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">    
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Banner</div>
-                <div class="panel-body">
-                    <div class="row">
+<div class="row">
                         <div class="col-md-6">
                             <a href="{{ URL('admin/banner/create') }}"><button class="btn btn-success">New Banner</button></a>
                         </div>
@@ -16,10 +10,10 @@
                         <div class="col-md-12">
                             <table class="table table-striped">
                                 <thead>
-                                    <td>ID</td>
-                                    <td>Nama</td>
-                                    <td>Gambar</td>
-                                    <td>Keterangan</td>    
+                                    <th width="50px">ID</th>
+                                    <th>Nama</th>
+                                    <th>Gambar</th>
+                                    <th width="230px">Keterangan</th>    
                                 </thead>
                                 <tbody>
                                 @foreach ($banner as $dt_banner)
@@ -40,10 +34,5 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>                    
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    </div>
 @endsection

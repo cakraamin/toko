@@ -1,18 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Brand</div>
-                <div class="panel-body">                        
-                    {!! Form::model($data,['class' => 'form-horizontal','method' => 'PATCH','route'=>['admin.kami.update',$data['id_kami']]]) !!}
+{!! Form::model($data,['class' => 'form-horizontal','method' => 'PATCH','route'=>['admin.kami.update',$data->id_kami]]) !!}
                         <div class="form-group">
                             <label class="col-md-4 control-label">Gambar Tentang Kami</label>
 
                             <div class="col-md-6">                                
-                                {!! Form::file('image', null) !!}
+                                {!! Form::file('image', null) !!}<br/>
+                                <img src="{{asset('upload/gambar/'.$data->gambar_kami)}}" width="300">
                             </div>
                         </div>
 
@@ -20,7 +15,7 @@
                             <label class="col-md-4 control-label">Deskripsi</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="deskripsi">                                
+                                <input type="text" class="form-control" name="deskripsi" value="{{ $data->deskripsi }}">                                
 
                                 @if ($errors->has('deskripsi'))
                                     <span class="help-block">
@@ -32,13 +27,8 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+                                {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
                             </div>
                         </div>                    
                     {!! Form::close() !!}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

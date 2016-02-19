@@ -48,6 +48,9 @@
                         <a href="{{ URL('/cart') }}">Cart</a>
                     </li>
                     <li>
+                        <a href="{{ URL('/konfirmasi') }}">Konfirmasi Pembayaran</a>
+                    </li>
+                    <li>
                         <a href="{{ URL('/testimoni') }}">Testimoni</a>
                     </li>
                     <li>
