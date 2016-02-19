@@ -111,10 +111,26 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $productUpdate = $request->all();
-        $product = Product::find($id);
-        $product->update($productUpdate);
+    {        
+        $product = Product::findOrFail($id);        
+
+        $data['nama'] = $request->nama;
+        $data['harga'] = $request->harga;
+        $data['keterangan'] = $request->keterangan;
+        $data['berat'] = $request->berat;
+        $data['id_brand'] = $request->brand;
+        $data['id_kategori'] = $request->categori;
+
+        if ($request->hasFile('image')) {
+            $data['gambar'] = $this->savePhoto($request->file('image'));
+        }        
+
+        if($product->update($data)){
+            \Flash::success('Product Berhasil Diupdate');
+        }else{
+            \Flash::info('Product Gagal Diupdate');
+        }
+
         return redirect('admin/product');
     }
 

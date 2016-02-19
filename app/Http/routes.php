@@ -41,8 +41,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/admin/testimoni', 'TestimoniController');
     Route::resource('/admin/download', 'DownloadController');
     Route::get('/admin/kami', 'KamiController@index');
-    Route::post('/admin/kami', 'KamiController@create');
-    Route::put('/admin/kami', 'KamiController@update');
+    Route::post('/admin/kami', 'KamiController@create');    
+    Route::put('/admin/kami/{kami}', ['as' => 'admin.kami.update', 'uses' => 'KamiController@update']);    
+    Route::patch('/admin/kami/{kami}', ['as' => 'admin.kami.update', 'uses' => 'KamiController@update']);        
     Route::resource('/admin/brand', 'BrandController');
     Route::resource('/admin/categori', 'CategoriController');
     Route::resource('/admin/product', 'ProductController');

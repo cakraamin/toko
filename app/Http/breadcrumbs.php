@@ -10,7 +10,7 @@ Breadcrumbs::register('home', function($breadcrumbs)
 Breadcrumbs::register('kami', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Blog');
+    $breadcrumbs->push('Tentang Kami');
 });
 
 // Home > Blog

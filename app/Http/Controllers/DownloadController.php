@@ -40,14 +40,9 @@ class DownloadController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'nama_download' => 'required|max:200',
-        // ]);
-
-        // $imageTempName = $request->file('image')->getPathname();
-        // $imageName = $request->file('image')->getClientOriginalName();
-        // $path = base_path() . '/public/file/';
-        // $request->file('image')->move($path , $imageName);
+        $this->validate($request, [
+            'nama_download' => 'required|max:200',
+        ]);        
 
         $data['nama_download'] = $request->nama_download;
 
@@ -55,18 +50,11 @@ class DownloadController extends Controller
             $data['file_download'] = $this->savePhoto($request->file('image'));
         }
 
-        $download = Download::create($data);
-
-
-        // $down = new Download;
-        // $down->nama_download = $request->nama_download;
-        // $down->file_download = $imageName;
-        
-        // if($down->save()){
-        //     $request->session()->flash('message', 'success|Sukses');
-        // }else{
-        //     $request->session()->flash('message', 'info|Maaf Gagal');
-        // }
+        if(Download::create($data)){
+            \Flash::success('Download Berhasil Disimpan');
+        }else{
+            \Flash::info('Download Gagal Disimpan');
+        }        
                 
         return redirect('admin/download');        
     }
@@ -103,10 +91,21 @@ class DownloadController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $downUpdate = $request->all();
-        $down = Download::find($id);
-        $down->update($downUpdate);
+    {        
+        $down = Download::findOrFail($id);        
+
+        $data['nama_download'] = $request->nama_download;        
+
+        if ($request->hasFile('image')) {
+            $data['file_download'] = $this->savePhoto($request->file('image'));
+        }        
+
+        if($down->update($data)){
+            \Flash::success('Download Berhasil Diupdate');
+        }else{
+            \Flash::info('Download Gagal Diupdate');
+        }
+
         return redirect('admin/download');
     }
 

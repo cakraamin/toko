@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Kami;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Cart;
@@ -31,6 +32,7 @@ class MainController extends Controller
 
     public function kami()
     {
-    	return view('front.kami');
+        $kami = Kami::all()->first();
+    	return view('front.kami',compact('kami'));
     }
 }

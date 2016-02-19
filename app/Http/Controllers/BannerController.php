@@ -87,10 +87,21 @@ class BannerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $bannerUpdate = $request->all();
-        $banner = Banner::find($id);
-        $banner->update($brandUpdate);
+    {       
+        $banner = Banner::findOrFail($id);        
+
+        $data['judul_banner'] = $request->judul_banner;        
+
+        if ($request->hasFile('image')) {
+            $data['gambar_banner'] = $this->savePhoto($request->file('image'));
+        }        
+
+        if($banner->update($data)){
+            \Flash::success('Banner Berhasil Diupdate');
+        }else{
+            \Flash::info('Banner Gagal Diupdate');
+        }
+
         return redirect('admin/banner');
     }
 
@@ -103,6 +114,7 @@ class BannerController extends Controller
     public function destroy($id)
     {
         Banner::find($id)->delete();
+        \Flash::success('Banner Berhasil Dihapus');
         return redirect('admin/banner');
     }
 

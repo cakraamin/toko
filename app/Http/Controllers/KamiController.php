@@ -14,6 +14,41 @@ class KamiController extends Controller
     public function index()
     {
     	$kami = Kami::all();        
-        return view('admin.create_kami',compact('kami'));
+    	if(count($kami) > 0){
+    		$data = Kami::all()->first();        
+    		return view('admin.edit_kami',compact('data'));
+    	}else{
+    		return view('admin.create_kami',compact('kami'));
+    	}        
+    }
+
+    public function create(Request $request)
+    {
+        $data['deskripsi'] = $request->deskripsi;
+
+        if ($request->hasFile('image')) {
+            $data['gambar_kami'] = $this->savePhoto($request->file('image'));
+        }        
+        
+        if(Kami::create($data)){
+            \Flash::success('Tentang Kami Berhasil Disimpan');
+        }else{
+            \Flash::info('Tentang Kami Gagal Disimpan');
+        }
+                
+        return redirect('admin/kami');
+    }
+
+    public function update(Request $request)
+    {
+    	echo "okelah";
+    }
+
+    protected function savePhoto(UploadedFile $photo)
+    {
+        $fileName = str_random(40) . '.' . $photo->guessClientExtension();
+        $destinationPath = public_path() . '/upload/gambar/';
+        $photo->move($destinationPath, $fileName);
+        return $fileName;
     }
 }
