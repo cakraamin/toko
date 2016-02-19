@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-{!! Form::open(['url' => 'admin/product','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}
+{!! Form::model($data['product'],['class' => 'form-horizontal','method' => 'PATCH','route'=>['admin.product.update',$data['product']->id_product]]) !!}
                         <div class="form-group">
                             <label class="col-md-4 control-label">Nama Product</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="nama">                                
+                                <input type="text" class="form-control" name="nama" value="{{ $data['product']->nama }}">                                
 
                                 @if ($errors->has('nama'))
                                     <span class="help-block">
@@ -96,7 +96,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                                {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
                             </div>
                         </div>                    
                     {!! Form::close() !!}

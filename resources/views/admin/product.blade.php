@@ -21,8 +21,8 @@
                                     <tr>
                                         <td>{{ $dt_product->id_product }}</td>
                                         <td>{{ $dt_product->nama }}</td>   
-                                        <td>{{ $dt_product->id_brand }}</td>   
-                                        <td>okelah
+                                        <td>{{ $dt_product->nama_brand }}</td>   
+                                        <td>{{ $dt_product->nama_kategori }}
                                         </td>   
                                         <td>                                        
                                         {!! Form::open(['method' => 'DELETE', 'route'=>['admin.product.destroy', $dt_product->id_product]]) !!}

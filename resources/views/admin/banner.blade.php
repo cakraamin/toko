@@ -18,15 +18,18 @@
                                 <thead>
                                     <td>ID</td>
                                     <td>Nama</td>
+                                    <td>Gambar</td>
                                     <td>Keterangan</td>    
                                 </thead>
                                 <tbody>
                                 @foreach ($banner as $dt_banner)
                                     <tr>
                                         <td>{{ $dt_banner->id_banner }}</td>
-                                        <td>{{ $dt_banner->nama_banner }}</td>                                                                                                
+                                        <td>{{ $dt_banner->judul_banner }}</td>
+                                        <td>{{ $dt_banner->gambar_banner }}              
+                                        </td>
                                         <td>
-                                        <a href="{{url('/admin/banner',$dt_banner->id_banner)}}" class="btn btn-primary">Read</a>
+                                        <a href="{{url('/admin/banner',$dt_banner->id_banner)}}" class="btn btn-primary" style="float:left; margin-right: 3px">Read</a>
                                         {!! Form::open(['method' => 'DELETE', 'route'=>['admin.banner.destroy', $dt_banner->id_banner]]) !!}
                                         <a href="{{route('admin.banner.edit',$dt_banner->id_banner)}}" class="btn btn-warning">Update</a>
                                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
