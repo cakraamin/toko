@@ -11,5 +11,5 @@ class Categori extends Model
         'logo_kategori'        
     ];
 
-    protected $primaryKey = 'id_kategori';
+    protected $primaryKey = 'id_kategori';    
 }

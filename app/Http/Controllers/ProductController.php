@@ -19,8 +19,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $product = Product::all();        
+    {        
+        $product = Product::coba();        
         return view('admin.product',compact('product'));
     }
 

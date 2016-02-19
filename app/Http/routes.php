@@ -42,6 +42,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/admin/download', 'DownloadController');
     Route::get('/admin/kami', 'KamiController@index');
     Route::post('/admin/kami', 'KamiController@create');
+    Route::put('/admin/kami', 'KamiController@update');
     Route::resource('/admin/brand', 'BrandController');
     Route::resource('/admin/categori', 'CategoriController');
     Route::resource('/admin/product', 'ProductController');

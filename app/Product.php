@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -17,9 +18,14 @@ class Product extends Model
     ];
 
     protected $primaryKey = 'id_product';
+   
+    public static function coba()
+    {        
+        $hasil = DB::table('products')
+            ->join('brands', 'products.id_brand', '=', 'brands.id_brand')
+            ->join('categoris', 'products.id_kategori', '=', 'categoris.id_kategori')
+            ->get();
 
-    public function categoris()
-    {
-        return $this->belongsToMany('App\Categori');
+        return $hasil;
     }
 }
