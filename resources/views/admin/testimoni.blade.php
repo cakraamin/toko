@@ -19,7 +19,7 @@
                                         <td>{{ $dt_testi->nama }}</td>
                                         <td>{{ $dt_testi->instansi }}</td>                                                                  
                                         <td>
-                                        <a href="{{url('/admin/testimoni',$dt_testi->id_testimoni)}}" class="btn btn-primary">Read</a>
+                                        <a href="{{url('/admin/testimoni',$dt_testi->id_testimoni)}}" class="btn btn-primary" style="float:left; margin-right:3px">Read</a>
                                         {!! Form::open(['method' => 'DELETE', 'route'=>['admin.testimoni.destroy', $dt_testi->id_testimoni]]) !!}
                                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                                         {!! Form::close() !!}

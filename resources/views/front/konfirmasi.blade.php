@@ -1,10 +1,10 @@
 @extends('layouts.front')
 
 @section('content')
-    {!! Breadcrumbs::render('testimoni') !!}
+    {!! Breadcrumbs::render('konfirmasi') !!}
     <div class="row">
         <div class="col-md-12">
-            {!! Form::open(['url' => 'testimoni','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}
+            {!! Form::open(['url' => 'konfirmasi','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}
                         <div class="form-group">
                             <label class="col-md-4 control-label">Nama</label>
 
@@ -20,28 +20,28 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Instansi</label>
+                            <label class="col-md-4 control-label">Email</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="instansi">                                
+                                <input type="text" class="form-control" name="email">                                
 
-                                @if ($errors->has('instansi'))
+                                @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('instansi') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Testimoni</label>
+                            <label class="col-md-4 control-label">File Bukti Transfer</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="teks_testimoni">                                
+                                {!! Form::file('image', null) !!}                              
 
-                                @if ($errors->has('teks_testimoni'))
+                                @if ($errors->has('screen_shoot'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('teks_testimoni') }}</strong>
+                                        <strong>{{ $errors->first('screen_shoot') }}</strong>
                                     </span>
                                 @endif
                             </div>
