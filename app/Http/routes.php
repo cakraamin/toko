@@ -30,8 +30,11 @@ Route::group(['middleware' => 'web'], function () {
     //Route::get('/', 'MainController@index');
     Route::get('/', ['as' => 'home', 'uses' => 'MainController@index']);
     Route::get('/cart', 'MainController@cart');
-    Route::get('/testimoni', 'MainController@testimoni');
+    Route::get('/testimoni', 'MainController@testimoni');    
+    Route::post('/testimoni', 'MainController@simpan_testi');
     Route::get('/tentang_kami', 'MainController@kami');
+    Route::get('/konfirmasi', 'MainController@konfirmasi');
+    Route::post('/konfirmasi', 'MainController@simpan_konfirm');
 });
 
 Route::group(['middleware' => 'web'], function () {
@@ -50,4 +53,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/admin/banner', 'BannerController');
     Route::get('/admin/transaksi', 'TransaksiController@index');
     Route::get('/admin/konfirmasi', 'KonfirmasiController@index');
+    Route::get('/admin/konfirmasi/{konfirmasi}', 'KonfirmasiController@show');    
+    Route::delete('/admin/konfirmasi/{konfirmasi}', ['as' => 'admin.konfirmasi.destroy', 'uses' => 'KonfirmasiController@destroy']);
 });

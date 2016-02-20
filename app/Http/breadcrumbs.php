@@ -6,11 +6,25 @@ Breadcrumbs::register('home', function($breadcrumbs)
     $breadcrumbs->push('Home',route('home'));
 });
 
-// Home > About
+// Home > Tentang Kami
 Breadcrumbs::register('kami', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Tentang Kami');
+});
+
+// Home > Testimoni
+Breadcrumbs::register('testimoni', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Testimoni');
+});
+
+// Home > Testimoni
+Breadcrumbs::register('konfirmasi', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Konfirmasi');
 });
 
 // Home > Blog

@@ -9,8 +9,7 @@ class Konfirmasi extends Model
     protected $fillable=[
         'nama',
         'email',
-        'screen_shoot',
-        'status'
+        'screen_shoot'        
     ];
 
     protected $primaryKey = 'id_konfirmasi';
