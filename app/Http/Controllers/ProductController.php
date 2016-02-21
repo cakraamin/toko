@@ -52,6 +52,7 @@ class ProductController extends Controller
             'harga'      => 'required|max:200',
             'keterangan' => 'required',
             'berat'      => 'required|max:10',
+            'image'      => 'required|mimes:jpeg,bmp,png'
         ]);
 
         $data['nama'] = $request->nama;
@@ -111,7 +112,15 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {        
+    {      
+        $this->validate($request, [
+            'nama'       => 'required|max:200',
+            'harga'      => 'required|max:200',
+            'keterangan' => 'required',
+            'berat'      => 'required|max:10',
+            'image'      => 'mimes:jpeg,bmp,png'
+        ]);
+
         $product = Product::findOrFail($id);        
 
         $data['nama'] = $request->nama;

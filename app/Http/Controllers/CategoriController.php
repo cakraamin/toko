@@ -42,9 +42,10 @@ class CategoriController extends Controller
     {
         $this->validate($request, [
             'nama_kategori' => 'required|max:200',
+            'image'         => 'required|mimes:jpeg,bmp,png'
         ]);
 
-        $data['nama_kategori'] = $request->nama_categori;
+        $data['nama_kategori'] = $request->nama_kategori;
 
         if ($request->hasFile('image')) {
             $data['logo_kategori'] = $this->savePhoto($request->file('image'));
@@ -92,7 +93,10 @@ class CategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //$CategoriUpdate = $request->all();
+        $this->validate($request, [
+            'nama_kategori' => 'required|max:200',
+            'image'         => 'mimes:jpeg,bmp,png'
+        ]);
 
         $categori = Categori::findOrFail($id);
         //$data = $request->only('name', 'model');

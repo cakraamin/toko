@@ -24,7 +24,14 @@ Breadcrumbs::register('testimoni', function($breadcrumbs)
 Breadcrumbs::register('konfirmasi', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Konfirmasi');
+    $breadcrumbs->push('Konfirmasi Pembayaran');
+});
+
+// Home > Brand > [Brand]
+Breadcrumbs::register('brand', function($breadcrumbs, $brand)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push($brand, route('home'));
 });
 
 // Home > Blog
@@ -32,13 +39,6 @@ Breadcrumbs::register('blog', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Blog', route('blog'));
-});
-
-// Home > Blog > [Category]
-Breadcrumbs::register('category', function($breadcrumbs, $category)
-{
-    $breadcrumbs->parent('blog');
-    $breadcrumbs->push($category->title, route('category', $category->id));
 });
 
 // Home > Blog > [Category] > [Page]

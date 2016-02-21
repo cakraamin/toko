@@ -40,6 +40,11 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'judul_banner'  => 'required|max:200',
+            'image'         => 'required|mimes:jpeg,bmp,png'
+        ]);
+
         $data['judul_banner'] = $request->judul_banner;
 
         if ($request->hasFile('image')) {
@@ -88,6 +93,11 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {       
+        $this->validate($request, [
+            'judul_banner'  => 'required|max:200',
+            'image'         => 'mimes:jpeg,bmp,png'
+        ]);
+
         $banner = Banner::findOrFail($id);        
 
         $data['judul_banner'] = $request->judul_banner;        

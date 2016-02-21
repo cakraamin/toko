@@ -35,6 +35,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/tentang_kami', 'MainController@kami');
     Route::get('/konfirmasi', 'MainController@konfirmasi');
     Route::post('/konfirmasi', 'MainController@simpan_konfirm');
+    Route::get('/brand/{kode}/{judul}','MainController@brand');
+    Route::get('order/{order}','MainController@order');
 });
 
 Route::group(['middleware' => 'web'], function () {

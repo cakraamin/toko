@@ -41,7 +41,8 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_brand' => 'required|max:200',
+            'nama_brand'    => 'required|max:200',
+            'image'         => 'required|mimes:jpeg,bmp,png'
         ]);    
 
         $data['nama_brand'] = $request->nama_brand;
@@ -92,7 +93,10 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //$brandUpdate = $request->all();       
+         $this->validate($request, [
+            'nama_brand'    => 'required|max:200',
+            'image'         => 'mimes:jpeg,bmp,png'
+        ]);  
 
         $brand = Brand::findOrFail($id);
         //$data = $request->only('name', 'model');

@@ -8,6 +8,10 @@ use Cart;
 use App\Kami;
 use App\Testimoni;
 use App\Konfirmasi;
+use App\Categori;
+use App\Brand;
+use App\Product;
+use App\Banner;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -20,12 +24,24 @@ class MainController extends Controller
 		//Cart::add('1239ad0', 'Product 2', 2, 5.95, array('size' => 'large'));
     	//echo "okelah kalo begitu";
     	//print_r(Cart::content());
-    	return view('front.home');
+        $data = array(
+            'brand'      => Brand::all(),
+            'banner'     => Banner::all(),
+            'product'    => Product::all()
+        );
+
+    	return view('front.home',compact('data'));
     }
 
     public function cart()
     {
-    	return view('front.cart');
+        $data = array(
+            'brand'      => Brand::all(),
+            'cart'       => Cart::content(),
+            'total'      => Cart::total()
+        );
+
+    	return view('front.cart',compact('data'));
     }
 
     public function testimoni()
@@ -87,6 +103,24 @@ class MainController extends Controller
     {
         $kami = Kami::all()->first();
     	return view('front.kami',compact('kami'));
+    }
+
+    public function brand($id,$judul)
+    {        
+        $data = array(
+            'id'        => $id,
+            'judul'     => $judul,
+            'brand'     => Brand::all(),
+            'barang'    => Product::where('id_brand', $id)->orderBy('id_product', 'desc')->take(10)->get()
+        );
+        return view('front.detail',compact('data'));
+    }
+
+    public function order($id)
+    {
+        $product = Product::find($id);
+        Cart::add($id, $product->nama, 1, $product->harga);
+        return redirect('cart');
     }
 
     protected function savePhoto(UploadedFile $photo)
