@@ -22,6 +22,11 @@
                             <div class="col-md-6">                                
                                 {!! Form::file('image', null) !!}<br/>
                                 <img src="{{asset('upload/banner/'.$banner->gambar_banner)}}" width="300">
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>                                                
 

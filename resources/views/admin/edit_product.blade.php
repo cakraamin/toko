@@ -75,8 +75,8 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Keterangan Product</label>
 
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="keterangan" value="{{ $data['product']->keterangan }}">                                
+                            <div class="col-md-6">                                
+                                <textarea name="keterangan" id="summernote">{{ $data['product']->keterangan }}</textarea>
 
                                 @if ($errors->has('keterangan'))
                                     <span class="help-block">

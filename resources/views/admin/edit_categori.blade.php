@@ -21,6 +21,11 @@
                             <div class="col-md-6">
                                 {!! Form::file('image', null) !!}<br/>
                                 <img src="{{asset('upload/logo/'.$categori->logo_kategori)}}" width="300">
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>                                                
 

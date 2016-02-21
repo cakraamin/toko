@@ -6,11 +6,11 @@
                             <label class="col-md-4 control-label">Nama Kategori</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="nama_categori">                                
+                                <input type="text" class="form-control" name="nama_kategori">                                
 
-                                @if ($errors->has('nama_categori'))
+                                @if ($errors->has('nama_kategori'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('nama_categori') }}</strong>
+                                        <strong>{{ $errors->first('nama_kategori') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -21,6 +21,11 @@
 
                             <div class="col-md-6">                                
                                 {!! Form::file('image', null) !!}
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>                                                
 

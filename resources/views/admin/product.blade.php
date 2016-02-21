@@ -12,6 +12,7 @@
                                 <thead>
                                     <th width="50px">ID</th>
                                     <th>Nama</th>
+                                    <th>Harga</th>
                                     <th>Brand</th>
                                     <th>Categori</th>
                                     <th width="230px">Keterangan</th>    
@@ -21,6 +22,7 @@
                                     <tr>
                                         <td>{{ $dt_product->id_product }}</td>
                                         <td>{{ $dt_product->nama }}</td>   
+                                        <td>{{ $dt_product->harga }}</td>   
                                         <td>{{ $dt_product->nama_brand }}</td>   
                                         <td>{{ $dt_product->nama_kategori }}
                                         </td>   

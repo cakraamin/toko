@@ -76,7 +76,7 @@
                             <label class="col-md-4 control-label">Keterangan Product</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="keterangan">                                
+                                <textarea name="keterangan" id="summernote"></textarea>
 
                                 @if ($errors->has('keterangan'))
                                     <span class="help-block">

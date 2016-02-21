@@ -15,15 +15,15 @@
                             <label class="col-md-4 control-label">Deskripsi</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="deskripsi">                                
+                                <textarea name="deskripsi" id="summernote">{{ $data->deskripsi }}</textarea>
 
                                 @if ($errors->has('deskripsi'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('deskripsi') }}</strong>
                                     </span>
-                                @endif
+                                @endif                                
                             </div>
-                        </div>
+                        </div>                        
 
                         <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">

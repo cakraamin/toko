@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>BDR Computer Pati - Start Bootstrap Template</title>
+    <title>BDR Computer Pati - Termurah</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -69,11 +69,11 @@
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">Shop Name</p>
+                <p class="lead">BDR Computer</p>
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
+                    @foreach ($data['brand'] as $brand)
+                        <a href="{{ URL('brand/'.$brand->id_brand.'/'.str_slug($brand->nama_brand, '-')) }}" class="list-group-item">{{ $brand->nama_brand }}</a>
+                    @endforeach                                        
                 </div>
             </div>
 
