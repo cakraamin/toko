@@ -31,6 +31,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/', ['as' => 'home', 'uses' => 'MainController@index']);
     Route::get('/cart', 'MainController@cart');
     Route::get('/product', 'MainController@product');
+    Route::get('/pengiriman', 'MainController@pengiriman');
     Route::get('/testimoni', 'MainController@testimoni');    
     Route::post('/testimoni', 'MainController@simpan_testi');
     Route::get('/tentang_kami', 'MainController@kami');

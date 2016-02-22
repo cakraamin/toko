@@ -40,6 +40,17 @@ class MainController extends Controller
     	return view('front.cart',compact('data'));
     }
 
+    public function pengiriman()
+    {
+        $data = array(
+            'brand'      => Brand::all(),
+            'cart'       => Cart::content(),
+            'total'      => Cart::total()
+        );
+
+        return view('front.pengiriman',compact('data'));
+    }
+
     public function testimoni()
     {
         $data = Kami::all();

@@ -27,11 +27,17 @@ Breadcrumbs::register('konfirmasi', function($breadcrumbs)
     $breadcrumbs->push('Konfirmasi Pembayaran');
 });
 
-// Home > Brand > [Brand]
-Breadcrumbs::register('brand', function($breadcrumbs, $brand)
+// Home > Pembelian
+Breadcrumbs::register('pembelian', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push($brand, route('home'));
+    $breadcrumbs->push('Pembelian');
+});
+
+Breadcrumbs::register('pengiriman', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Pengiriman');
 });
 
 // Home > Product
