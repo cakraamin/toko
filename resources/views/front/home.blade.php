@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="caption">                                        
                                         <h4><a href="#">{{ $product->nama }}</a></h4>
-                                        <h4>{{ $product->harga }}</h4>
+                                        <h4>Rp {{ number_format($product->harga, "2", ",", ".") }}</h4>
                                         {!! $product->keterangan !!}
                                     </div>
                                     <div class="ratings">

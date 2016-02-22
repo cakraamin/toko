@@ -1,26 +1,30 @@
 @extends('layouts.front')
 
 @section('content')
-    {!! Breadcrumbs::render('kami') !!}
+    {!! Breadcrumbs::render('pembelian') !!}
     <div class="row">
         <div class="col-md-12">
             <ul class="nav nav-pills nav-wizard">
-                <li><a href="#" data-toggle="tab">Home</a><div class="nav-arrow"></div></li>
-                <li class="active"><div class="nav-wedge"></div><a href="#" data-toggle="tab">About</a><div class="nav-arrow"></div></li>
-                <li><div class="nav-wedge"></div><a href="#" data-toggle="tab">Contact</a></li>
+                <li class="active"><a href="#" data-toggle="tab">Pembelian</a><div class="nav-arrow"></div></li>
+                <li><div class="nav-wedge"></div><a href="#" data-toggle="tab">Pengiriman</a><div class="nav-arrow"></div></li>
+                <li><div class="nav-wedge"></div><a href="#" data-toggle="tab">Pembayaran</a></li>
             </ul>
         </div>
     </div>
-    <div class="row">        
-        @if (count($data['cart']) > 0)
-            <ol>
-            @foreach($data['cart'] as $cart)
-                <li>{{ $cart->name }} {{ $cart->qty }} {{ $cart->price }}  {{ $cart->subtotal }}</li>
-            @endforeach
-            </ol>
-            {{ $data['total'] }}
-        @else
-            <div class="col-md-12">Maaf Kosong</div>
-        @endif
+    <div class="row"> 
+        <div class="col-md-12">
+            @if (count($data['cart']) > 0)
+                <br/>
+                <table class="table table-striped">
+                @foreach($data['cart'] as $key => $cart)
+                    <tr><td>{{ $cart->name }}</td><td>{{ $cart->qty }}</td><td>Rp {{ number_format($cart->price, "2", ",", ".") }}</td><td>Rp {{ number_format($cart->subtotal, "2", ",", ".") }}</td></tr>
+                @endforeach
+                <tr><td colspan="3">Total</td><td>Rp {{ number_format($data['total'], "2", ",", ".") }}</td></tr>
+                </table>                
+                <a href="{{ URL('product') }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Lanjutkan Order</a> <a href="{{ URL('/pengiriman') }}" class="btn btn-success">Lanjutkan Transaksi</a>
+            @else
+                Maaf Kosong
+            @endif            
+        </div>                       
     </div>
 @endsection            

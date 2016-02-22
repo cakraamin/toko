@@ -93,7 +93,17 @@
                 @include('flash::message')
                 @yield('content')
             </div>
-
+            <div class="demo activate">
+                <span id="demo-setting">
+                    <i class="fa fa-cart-plus txt-color-blueDark fa-2x">( 10 )</i>                
+                </span> 
+                <h4>Rp 500.000</h4>
+                <ul>
+                    <li>Laptop</li>
+                    <li>VGA Card</li>                
+                </ul>
+                <a href="{{ URL('/cart') }}" class="btn btn-success"><i class="fa fa-shopping-cart"></i> Detail Cart</a>
+            </div>
         </div>
 
     </div>

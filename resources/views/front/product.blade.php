@@ -12,7 +12,7 @@
                                     </div>
                                     <div class="caption">                                        
                                         <h4><a href="#">{{ $barang->nama }}</a></h4>
-                                        <h4>{{ $barang->harga }}</h4>                                        
+                                        <h4>Rp {{ number_format($barang->harga, "2", ",", ".") }}</h4>                                        
                                         {!! $barang->keterangan !!}
                                     </div>
                                     <div class="ratings">
