@@ -73,6 +73,20 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-md-4 control-label">Stok Product</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="stok" value="{{ $data['product']->stok }}">                                
+
+                                @if ($errors->has('stok'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('stok') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-md-4 control-label">Keterangan Product</label>
 
                             <div class="col-md-6">                                

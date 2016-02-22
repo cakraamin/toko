@@ -1,7 +1,7 @@
 @extends('layouts.front')
 
 @section('content')
-    {!! Breadcrumbs::render('brand',$data['judul']) !!}
+    {!! Breadcrumbs::render('product') !!}
                 <div class="row">
                     @if (count($data['barang']) > 0)
                         @foreach ($data['barang'] as $barang)

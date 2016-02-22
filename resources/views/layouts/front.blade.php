@@ -17,6 +17,18 @@
     <!-- Custom CSS -->
     <link href="{{ URL::asset('css/shop-homepage.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+    <style type="text/css">
+    .box{
+        width:100%;
+        height:200px;
+        overflow:hidden;        
+        margin: 30px auto;
+    }
+    </style>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -45,7 +57,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">                    
                     <li>
-                        <a href="{{ URL('/cart') }}">Cart</a>
+                        <a href="{{ URL('/product') }}">Product</a>
                     </li>
                     <li>
                         <a href="{{ URL('/konfirmasi') }}">Konfirmasi Pembayaran</a>
@@ -108,6 +120,14 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript"> 
+    $(document).ready(function() {
+        var $box = $('.box').css('width');
+        var $img = $('.box img').width();
+        var $gox = (($img/2 - (parseInt($box, 10) / 2)) + 'px');
+        $('.box img').css('marginLeft', '-'+$gox);        
+    });
+    </script>
 
 </body>
 
