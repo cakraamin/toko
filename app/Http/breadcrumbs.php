@@ -34,11 +34,11 @@ Breadcrumbs::register('brand', function($breadcrumbs, $brand)
     $breadcrumbs->push($brand, route('home'));
 });
 
-// Home > Blog
-Breadcrumbs::register('blog', function($breadcrumbs)
+// Home > Product
+Breadcrumbs::register('product', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Blog', route('blog'));
+    $breadcrumbs->push('Product');
 });
 
 // Home > Blog > [Category] > [Page]

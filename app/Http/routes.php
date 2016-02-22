@@ -30,6 +30,7 @@ Route::group(['middleware' => 'web'], function () {
     //Route::get('/', 'MainController@index');
     Route::get('/', ['as' => 'home', 'uses' => 'MainController@index']);
     Route::get('/cart', 'MainController@cart');
+    Route::get('/product', 'MainController@product');
     Route::get('/testimoni', 'MainController@testimoni');    
     Route::post('/testimoni', 'MainController@simpan_testi');
     Route::get('/tentang_kami', 'MainController@kami');

@@ -52,6 +52,7 @@ class ProductController extends Controller
             'harga'      => 'required|max:200',
             'keterangan' => 'required',
             'berat'      => 'required|max:10',
+            'stok'       => 'required|max:10',
             'image'      => 'required|mimes:jpeg,bmp,png'
         ]);
 
@@ -59,6 +60,7 @@ class ProductController extends Controller
         $data['harga'] = $request->harga;
         $data['keterangan'] = $request->keterangan;
         $data['berat'] = $request->berat;
+        $data['stok'] = $request->stok;
         $data['id_brand'] = $request->brand;
         $data['id_kategori'] = $request->categori;
 
@@ -118,6 +120,7 @@ class ProductController extends Controller
             'harga'      => 'required|max:200',
             'keterangan' => 'required',
             'berat'      => 'required|max:10',
+            'stok'       => 'required|max:10',
             'image'      => 'mimes:jpeg,bmp,png'
         ]);
 
@@ -127,6 +130,7 @@ class ProductController extends Controller
         $data['harga'] = $request->harga;
         $data['keterangan'] = $request->keterangan;
         $data['berat'] = $request->berat;
+        $data['stok'] = $request->stok;
         $data['id_brand'] = $request->brand;
         $data['id_kategori'] = $request->categori;
 

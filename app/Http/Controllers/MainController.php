@@ -19,11 +19,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class MainController extends Controller
 {
     public function index()
-    {
-    	//Cart::add('192ao12', 'Product 1', 1, 9.99);
-		//Cart::add('1239ad0', 'Product 2', 2, 5.95, array('size' => 'large'));
-    	//echo "okelah kalo begitu";
-    	//print_r(Cart::content());
+    {    	
         $data = array(
             'brand'      => Brand::all(),
             'banner'     => Banner::all(),
@@ -114,6 +110,15 @@ class MainController extends Controller
             'barang'    => Product::where('id_brand', $id)->orderBy('id_product', 'desc')->take(10)->get()
         );
         return view('front.detail',compact('data'));
+    }
+
+    public function product()
+    {        
+        $data = array(            
+            'brand'     => Brand::all(),
+            'barang'    => Product::all()
+        );
+        return view('front.product',compact('data'));
     }
 
     public function order($id)

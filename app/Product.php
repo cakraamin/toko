@@ -14,6 +14,7 @@ class Product extends Model
         'harga',
         'keterangan',
         'berat',
+        'stok',
         'gambar'
     ];
 
