@@ -18,6 +18,7 @@
     <link href="{{ URL::asset('css/shop-homepage.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 
 
     <style type="text/css">
@@ -129,8 +130,14 @@
     <script src="{{ URL::asset('js/jquery.js') }}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
     <script type="text/javascript"> 
+    $('.selectpicker').selectpicker({
+      style: 'btn-info',
+      size: 4
+    });
+
     $(document).ready(function() {
         var $box = $('.box').css('width');
         var $img = $('.box img').width();
