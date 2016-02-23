@@ -12,6 +12,7 @@ use App\Categori;
 use App\Brand;
 use App\Product;
 use App\Banner;
+use App\Classes\Ongkir;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -42,13 +43,33 @@ class MainController extends Controller
 
     public function pengiriman()
     {
+        $kirim = array(
+            'jne'       => 'JNE',
+            'tiki'      => 'TIKI',
+            'pos'       => 'POS Indonesia'
+        );
+
         $data = array(
             'brand'      => Brand::all(),
             'cart'       => Cart::content(),
-            'total'      => Cart::total()
+            'total'      => Cart::total(),
+            'combo'      => $this->getCombo(),
+            'pengiriman' => $kirim
         );
 
         return view('front.pengiriman',compact('data'));
+    }
+
+    public function simpan_kirim(Request $request)
+    {
+        $this->validate($request, [
+            'nama'          => 'required|max:200',
+            'email'         => 'required|max:200',
+            'telp'          => 'required|max:200',
+            'alamat'        => 'required|max:200'
+        ]);
+
+        echo "okelah";
     }
 
     public function testimoni()
@@ -145,5 +166,23 @@ class MainController extends Controller
         $destinationPath = public_path() . '/upload/konfirmasi/';
         $photo->move($destinationPath, $fileName);
         return $fileName;
+    }
+
+    protected function getCombo()
+    {
+        $hasil = array();
+
+        $prop = json_decode(Ongkir::getProvinsi());        
+        foreach($prop->rajaongkir->results as $propinsi)
+        {
+            //echo $propinsi->province_id." dan ".$propinsi->province."<br/>";
+            $kota = json_decode(Ongkir::getCity($propinsi->province_id));
+            foreach($kota->rajaongkir->results as $city)
+            {
+                $hasil[$city->city_id] = $city->city_name." , ".$propinsi->province;
+            }            
+        }
+
+        return $hasil;
     }
 }

@@ -32,6 +32,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/cart', 'MainController@cart');
     Route::get('/product', 'MainController@product');
     Route::get('/pengiriman', 'MainController@pengiriman');
+    Route::post('/pengiriman', 'MainController@simpan_kirim');
     Route::get('/testimoni', 'MainController@testimoni');    
     Route::post('/testimoni', 'MainController@simpan_testi');
     Route::get('/tentang_kami', 'MainController@kami');
