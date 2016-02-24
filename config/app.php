@@ -179,7 +179,7 @@ return [
         /*
         messagebox
         */
-        Laracasts\Flash\FlashServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,        
     ],
 
     /*
@@ -235,7 +235,7 @@ return [
 
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
 
-        'Flash'     => Laracasts\Flash\Flash::class
+        'Flash'     => Laracasts\Flash\Flash::class,             
     ],
 
 ];
