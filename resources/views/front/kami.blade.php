@@ -4,8 +4,8 @@
     {!! Breadcrumbs::render('kami') !!}
     <div class="row">
         <div class="col-md-12">
-            {{ $kami->gambar_kami }}<br/>
-            {{ $kami->deskripsi }} 
+            {{ $data['kami']->gambar_kami }}<br/>
+            {{ $data['kami']->deskripsi }} 
         </div>
     </div>
 @endsection            

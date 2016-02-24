@@ -17,9 +17,10 @@
                 <br/>
                 <table class="table table-striped">
                 @foreach($data['cart'] as $key => $cart)
-                    <tr><td>{{ $cart->name }}</td><td>{{ $cart->qty }}</td><td>Rp {{ number_format($cart->price, "2", ",", ".") }}</td><td>Rp {{ number_format($cart->subtotal, "2", ",", ".") }}</td></tr>
+                    <tr><td>{{ $cart->name }}</td><td>{{ $cart->qty }}</td><td>Rp {{ number_format($cart->price, "2", ",", ".") }}</td><td>Rp {{ number_format($cart->subtotal, "2", ",", ".") }}</td><td><a href="{{ URL('/hapus/'.$cart->rowid) }}" class="btn btn-danger"><i class="fa fa-trash"></i>
+ Hapus</a></td></tr>
                 @endforeach
-                <tr><td colspan="3">Total</td><td>Rp {{ number_format($data['total'], "2", ",", ".") }}</td></tr>
+                <tr><td colspan="3">Total</td><td>Rp {{ number_format($data['total'], "2", ",", ".") }}</td><td>&nbsp;</td></tr>
                 </table>                
                 <a href="{{ URL('product') }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Lanjutkan Order</a> <a href="{{ URL('/pengiriman') }}" class="btn btn-success">Lanjutkan Transaksi</a>
             @else

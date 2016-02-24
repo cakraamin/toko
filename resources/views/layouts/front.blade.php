@@ -12,23 +12,13 @@
     <title>BDR Computer Pati - Termurah</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">    
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">    
 
     <!-- Custom CSS -->
     <link href="{{ URL::asset('css/shop-homepage.css') }}" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
-
-
-    <style type="text/css">
-    .box{
-        width:100%;
-        height:200px;
-        overflow:hidden;        
-        margin: 30px auto;
-    }
-    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,9 +30,10 @@
 </head>
 
 <body>
-
+<header class="headerman"></header>
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- navbar-fixed-top -->
+    <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -94,16 +85,22 @@
                 @include('flash::message')
                 @yield('content')
             </div>
-            <div class="demo activate">
+            <div class="demo">
                 <span id="demo-setting">
-                    <i class="fa fa-cart-plus txt-color-blueDark fa-2x">( 10 )</i>                
-                </span> 
-                <h4>Rp 500.000</h4>
-                <ul>
-                    <li>Laptop</li>
-                    <li>VGA Card</li>                
-                </ul>
-                <a href="{{ URL('/cart') }}" class="btn btn-success"><i class="fa fa-shopping-cart"></i> Detail Cart</a>
+                    <i class="fa fa-shopping-cart txt-color-blueDark fa-2x"></i></span>
+                <div class="isi">
+                    <h4>Rp {{ number_format($data['total'], "2", ",", ".") }}</h4>
+                    @if (count($data['cart']) > 0)
+                        <ol>
+                            @foreach($data['cart'] as $dt_cart)
+                            <li>{{ $dt_cart->name }}</li>
+                            @endforeach                
+                        </ol>
+                    @else
+                        <p>Kosong</p>
+                    @endif                    
+                    <a href="{{ URL('/cart') }}" class="btn btn-success"><i class="fa fa-shopping-cart"></i> Detail Cart</a>
+                </div>
             </div>
         </div>
 
@@ -133,10 +130,32 @@
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
     <script type="text/javascript"> 
+    $(function(){   
+        var scrolle = $(document).scrollTop();
+        var headere = $('.headerman').outerHeight();
+
+        $(window).scroll(function() {
+            var nilaine = $(document).scrollTop();
+
+            if (nilaine > headere){
+                $('.headerman').addClass('sembunyi');
+                $('.navbar').addClass('navbar-fixed-top');
+            } else {
+                $('.headerman').removeClass('sembunyi')
+                $('.navbar').removeClass('navbar-fixed-top')
+            }
+
+            scrolle = $(document).scrollTop(); 
+         });
+    });
     $('.selectpicker').selectpicker({
       style: 'btn-info',
       size: 4
     });
+
+    $('#demo-setting').click(function () {        
+        $('.demo').toggleClass('activate');
+    })
 
     $(document).ready(function() {
         var $box = $('.box').css('width');

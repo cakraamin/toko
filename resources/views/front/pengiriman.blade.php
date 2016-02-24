@@ -2,6 +2,16 @@
 
 @section('content')
     {!! Breadcrumbs::render('pengiriman') !!}
+    <script type="text/javascript">
+    function pilih(){
+        var tujuan = $("#tujuan").val();
+        var via = $("#via").val();
+        var jumlah = $("#jumlah").val();
+        $.get( "pilihan/"+tujuan+"/"+via+"/"+jumlah, function( data ) {
+            $("#pilihan").html(data);     
+        });
+    }
+    </script>
     <div class="row">
         <div class="col-md-12">
             <ul class="nav nav-pills nav-wizard">
@@ -12,27 +22,32 @@
         </div>
     </div>
     <div class="row"> 
-        <div class="col-md-12"><br/>
-            {!! Form::open(['url' => 'pengiriman','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}
+        <div class="col-md-12"><br/>                
+            @if (count($data['cart']) > 0)                
+                {!! Form::open(['url' => 'pengiriman','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Provinsi</label>
+                            <label class="col-md-4 control-label">Tujuan</label>
 
                             <div class="col-md-6">
-                                 {!!Form::select('kota', $data['combo'], '', array("class"=>"form-control selectpicker","data-live-search" => "true") ) !!}
+                                 {!!Form::select('kota', $data['combo'], '', array("class"=>"form-control selectpicker","data-live-search" => "true","onChange" => "pilih()","id" => "tujuan") ) !!}
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label">Pengiriman</label>
 
                             <div class="col-md-6">
-                                 {!!Form::select('pengiriman', $data['pengiriman'], '', array("class"=>"form-control") ) !!}
+                                 {!!Form::select('pengiriman', $data['pengiriman'], '', array("class"=>"form-control","id" => "via","onChange" => "pilih()") ) !!}
                             </div>
+                        </div>
+                        <div class="form-group" id="pilihan">
+                            
                         </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label">Nama</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="nama">                                
+                                <input type="text" class="form-control" name="nama">  
+                                <input type="hidden" name="jumlah" value="{{ $data['jumlah'] }}" id="jumlah">                       
                                 @if ($errors->has('nama'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('nama') }}</strong>
@@ -81,11 +96,7 @@
                                 {!! Form::submit('Kirim', ['class' => 'btn btn-primary']) !!}                  
                             </div> 
                         </div> 
-            {!! Form::close() !!}        
-            @if (count($data['cart']) > 0)                
-                <div data-theme="light" id="rajaongkir-widget"></div>
-                <script type="text/javascript" src="//rajaongkir.com/script/widget.js"></script>              
-                <a href="{{ URL('/pembayaran') }}" class="btn btn-success">Lanjutkan Pembayaran</a>
+            {!! Form::close() !!}  
             @else
                 Maaf Kosong
             @endif            
