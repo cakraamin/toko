@@ -100,16 +100,21 @@ footer {
         overflow:hidden;        
         margin: 30px auto;
     }
-    .headerman{      
-      color:white; 
-      font-size:24px; 
+    .headerman{                   
       padding:5px; 
-      text-align:center; 
       position: fixed; 
       left:0; 
       top:0; 
       width:100%;       
       transition: top .5s;      
+    }
+    .headerman span{   
+      background-size: 250px 75px;
+      background-image: url("../logo/logo.png");   
+      display: block;
+      width: 250px;
+      height: 75px;
+      margin-left: 4.5%;
     }
 
     .sembunyi {
@@ -119,6 +124,14 @@ footer {
       top:0;
         z-index: 9999;
     }
+
+img.tentang_kami{
+  width: 300px;
+  padding: 5px;
+  border: solid 1px #999;
+  float: left;
+  margin-right: 10px;
+}
 
 /*wizard*/
 .nav-pills.nav-wizard > li {
