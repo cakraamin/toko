@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>BDR Computer Pati - Termurah</title>
-
+    <link rel='shortcut icon' type='image/x-icon' href='{{ asset("logo/favicon.ico") }}' />
     <!-- Bootstrap Core CSS -->
     <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">    
 
@@ -30,7 +30,9 @@
 </head>
 
 <body>
-<header class="headerman"></header>
+<header class="headerman">
+    <span></span>
+</header>
     <!-- Navigation -->
     <!-- navbar-fixed-top -->
     <nav class="navbar navbar-inverse" role="navigation">
@@ -43,7 +45,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ URL('/') }}">BDR Computer Pati</a>
+                <a class="navbar-brand" href="{{ URL('/') }}"><i class="fa fa-home"></i>
+</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -73,12 +76,24 @@
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">BDR Computer</p>
+                <p class="lead">Kategori Product</p>
                 <div class="list-group">
                     @foreach ($data['brand'] as $brand)
                         <a href="{{ URL('brand/'.$brand->id_brand.'/'.str_slug($brand->nama_brand, '-')) }}" class="list-group-item">{{ $brand->nama_brand }}</a>
                     @endforeach                                        
                 </div>
+                <p class="lead">Download / Pricelist</p>
+                @foreach($data['download'] as $download)
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>{{ $download->nama_download }}</p>
+                        <a href="{{ URL('download/'.$download->file_download) }}" class="btn btn-success"><i class="fa fa-download"></i> Download</a>
+                    </div>
+                    <div class="panel-footer">
+                        Tanggal {{ $download->updated_at }}
+                    </div>
+                </div>
+                @endforeach
             </div>
 
             <div class="col-md-9">

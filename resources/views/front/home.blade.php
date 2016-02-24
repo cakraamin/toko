@@ -38,7 +38,7 @@
                                         <img src="{{ asset('upload/gambar/'.$product->gambar) }}" alt="">
                                     </div>
                                     <div class="caption">                                        
-                                        <h4><a href="#">{{ $product->nama }}</a></h4>
+                                        <h4><a href="{{ URL('product/'.$product->id_product.'/'.str_slug($product->nama, '-')) }}">{{ $product->nama }}</a></h4>
                                         <h4>Rp {{ number_format($product->harga, "2", ",", ".") }}</h4>
                                         {!! $product->keterangan !!}
                                     </div>

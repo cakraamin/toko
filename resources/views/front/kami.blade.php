@@ -4,8 +4,8 @@
     {!! Breadcrumbs::render('kami') !!}
     <div class="row">
         <div class="col-md-12">
-            {{ $data['kami']->gambar_kami }}<br/>
-            {{ $data['kami']->deskripsi }} 
+        	<img src="{{ asset('upload/gambar/'.$data['kami']->gambar_kami) }}" alt="Tentang Kami" class="tentang_kami">       
+            {!! $data['kami']->deskripsi !!} 
         </div>
     </div>
 @endsection            

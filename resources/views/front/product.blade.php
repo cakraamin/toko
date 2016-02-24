@@ -11,7 +11,7 @@
                                     <img src="{{ asset('upload/gambar/'.$barang->gambar) }}" alt="">
                                     </div>
                                     <div class="caption">                                        
-                                        <h4><a href="#">{{ $barang->nama }}</a></h4>
+                                        <h4><a href="{{ URL('product/'.$barang->id_product.'/'.str_slug($barang->nama, '-')) }}">{{ $barang->nama }}</a></h4>
                                         <h4>Rp {{ number_format($barang->harga, "2", ",", ".") }}</h4>                                        
                                         {!! $barang->keterangan !!}
                                     </div>
