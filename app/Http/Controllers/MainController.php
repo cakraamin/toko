@@ -12,6 +12,8 @@ use App\Categori;
 use App\Brand;
 use App\Product;
 use App\Banner;
+use App\Transaksi;
+use App\Dtransaksi;
 use App\Classes\Ongkir;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -24,14 +26,16 @@ class MainController extends Controller
         $data = array(
             'brand'      => Brand::all(),
             'banner'     => Banner::all(),
-            'product'    => Product::all()
+            'product'    => Product::all(),
+            'cart'       => Cart::content(),
+            'total'      => Cart::total()
         );
 
     	return view('front.home',compact('data'));
     }
 
     public function cart()
-    {
+    {                  
         $data = array(
             'brand'      => Brand::all(),
             'cart'       => Cart::content(),
@@ -39,6 +43,14 @@ class MainController extends Controller
         );
 
     	return view('front.cart',compact('data'));
+    }
+
+    public function hapus($id)
+    {
+        Cart::remove($id);
+        \Flash::success('Hapus Transaksi Berhasil');
+
+        return redirect('cart');      
     }
 
     public function pengiriman()
@@ -54,6 +66,7 @@ class MainController extends Controller
             'cart'       => Cart::content(),
             'total'      => Cart::total(),
             'combo'      => $this->getCombo(),
+            'jumlah'     => $this->getTotalBerat(),
             'pengiriman' => $kirim
         );
 
@@ -69,12 +82,49 @@ class MainController extends Controller
             'alamat'        => 'required|max:200'
         ]);
 
-        echo "okelah";
+        $kode = str_random(10);
+
+        $data['nama'] = $request->nama;
+        $data['telp'] = $request->telp;
+        $data['email'] = $request->email;
+        $data['alamat'] = $request->alamat;
+        $data['kode_transaksi'] = $kode;
+        $data['tujuan'] = $request->kota;
+        $data['via'] = $request->pengiriman;
+        $data['total'] = Cart::total();
+        $data['paket'] = $request->paket;
+        $data['ongkir'] = $request->ongkir;
+
+        $transaksi = Transaksi::create($data);
+        if($transaksi){
+            foreach(Cart::content() as $d_transaksi){
+                $nilai['id_transaksi'] = print_r($transaksi->id_transaksi);
+                $nilai['id_product'] = $d_transaksi->id;
+                $nilai['qty'] = $d_transaksi->qty;
+                $nilai['sub_total'] = $d_transaksi->subtotal;
+                Dtransaksi::create($nilai);
+            }
+                                    
+            exit();
+        }else{
+            \Flash::info('Maaf Gagal');
+        }        
+    }
+
+    public function pilihan($tujuan,$via,$jumlah)
+    {
+        print_r(Ongkir::getCost($tujuan,$jumlah,$via));
     }
 
     public function testimoni()
     {
-        $data = Kami::all();
+        $data = array(
+            'form'       => Kami::all(),
+            'brand'      => Brand::all(),
+            'cart'       => Cart::content(),
+            'total'      => Cart::total()
+        );
+
     	return view('front.testimoni',compact('data'));
     }
 
@@ -123,14 +173,25 @@ class MainController extends Controller
 
     public function konfirmasi()
     {
-        $data = Konfirmasi::all();
+        $data = array(
+            'brand'      => Brand::all(),
+            'cart'       => Cart::content(),
+            'total'      => Cart::total()
+        );
+
         return view('front.konfirmasi',compact('data'));
     }
 
     public function kami()
     {
-        $kami = Kami::all()->first();
-    	return view('front.kami',compact('kami'));
+        $data = array(
+            'kami'       => Kami::all()->first(),
+            'brand'      => Brand::all(),
+            'cart'       => Cart::content(),
+            'total'      => Cart::total()
+        );
+        
+    	return view('front.kami',compact('data'));
     }
 
     public function brand($id,$judul)
@@ -139,7 +200,9 @@ class MainController extends Controller
             'id'        => $id,
             'judul'     => $judul,
             'brand'     => Brand::all(),
-            'barang'    => Product::where('id_brand', $id)->orderBy('id_product', 'desc')->take(10)->get()
+            'barang'    => Product::where('id_brand', $id)->orderBy('id_product', 'desc')->take(10)->get(),
+            'cart'       => Cart::content(),
+            'total'      => Cart::total()
         );
         return view('front.detail',compact('data'));
     }
@@ -148,7 +211,9 @@ class MainController extends Controller
     {        
         $data = array(            
             'brand'     => Brand::all(),
-            'barang'    => Product::all()
+            'barang'    => Product::all(),
+            'cart'       => Cart::content(),
+            'total'      => Cart::total()
         );
         return view('front.product',compact('data'));
     }
@@ -156,7 +221,7 @@ class MainController extends Controller
     public function order($id)
     {
         $product = Product::find($id);
-        Cart::add($id, $product->nama, 1, $product->harga);
+        Cart::add($id, $product->nama, 1, $product->harga,array('berat' => $product->berat));
         return redirect('cart');
     }
 
@@ -177,6 +242,7 @@ class MainController extends Controller
         {
             //echo $propinsi->province_id." dan ".$propinsi->province."<br/>";
             $kota = json_decode(Ongkir::getCity($propinsi->province_id));
+            $hasil["0"] = "Pilih Tujuan Pengiriman";
             foreach($kota->rajaongkir->results as $city)
             {
                 $hasil[$city->city_id] = $city->city_name." , ".$propinsi->province;
@@ -184,5 +250,19 @@ class MainController extends Controller
         }
 
         return $hasil;
+    }
+
+    function getTotalBerat()
+    {
+        $jumlah = 0;
+
+        $belanja = Cart::content();
+        foreach($belanja as $detail)
+        {
+            $options = $detail->options;
+            $jumlah = $jumlah + $options['berat'];
+        }
+
+        return $jumlah;
     }
 }

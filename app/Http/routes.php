@@ -33,7 +33,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/product', 'MainController@product');
     Route::get('/pengiriman', 'MainController@pengiriman');
     Route::post('/pengiriman', 'MainController@simpan_kirim');
-    Route::get('/testimoni', 'MainController@testimoni');    
+    Route::get('/pilihan/{tujuan}/{via}/{jumlah}','MainController@pilihan');
+    Route::get('/testimoni', 'MainController@testimoni');Route::get('/hapus/{hapus}', 'MainController@hapus');    
     Route::post('/testimoni', 'MainController@simpan_testi');
     Route::get('/tentang_kami', 'MainController@kami');
     Route::get('/konfirmasi', 'MainController@konfirmasi');
