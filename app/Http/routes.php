@@ -31,6 +31,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/', ['as' => 'home', 'uses' => 'MainController@index']);
     Route::get('/cart', 'MainController@cart');
     Route::get('/product', 'MainController@product');
+    Route::get('/product/{produk}/{judul}', 'MainController@detail');
     Route::get('/pengiriman', 'MainController@pengiriman');
     Route::post('/pengiriman', 'MainController@simpan_kirim');
     Route::get('/pilihan/{tujuan}/{via}/{jumlah}','MainController@pilihan');
@@ -41,6 +42,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/konfirmasi', 'MainController@simpan_konfirm');
     Route::get('/brand/{kode}/{judul}','MainController@brand');
     Route::get('order/{order}','MainController@order');
+    Route::get('download/{download}','MainController@download');
 });
 
 Route::group(['middleware' => 'web'], function () {

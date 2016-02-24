@@ -47,6 +47,13 @@ Breadcrumbs::register('product', function($breadcrumbs)
     $breadcrumbs->push('Product');
 });
 
+// Home > Brand
+Breadcrumbs::register('brand', function($breadcrumbs, $brand)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push($brand);
+});
+
 // Home > Blog > [Category] > [Page]
 Breadcrumbs::register('page', function($breadcrumbs, $page)
 {

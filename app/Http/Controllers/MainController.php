@@ -13,6 +13,7 @@ use App\Brand;
 use App\Product;
 use App\Banner;
 use App\Transaksi;
+use App\Download;
 use App\Dtransaksi;
 use App\Classes\Ongkir;
 use App\Http\Requests;
@@ -26,9 +27,10 @@ class MainController extends Controller
         $data = array(
             'brand'      => Brand::all(),
             'banner'     => Banner::all(),
-            'product'    => Product::all(),
+            'product'    => Product::limit(9)->offset(0)->get(),
             'cart'       => Cart::content(),
-            'total'      => Cart::total()
+            'total'      => Cart::total(),
+            'download'   => Download::limit(3)->offset(0)->get()
         );
 
     	return view('front.home',compact('data'));
@@ -39,10 +41,23 @@ class MainController extends Controller
         $data = array(
             'brand'      => Brand::all(),
             'cart'       => Cart::content(),
-            'total'      => Cart::total()
+            'total'      => Cart::total(),
+            'download'   => Download::limit(3)->offset(0)->get()
         );
 
     	return view('front.cart',compact('data'));
+    }
+
+    public function detail($id)
+    {
+        $data = array(
+            'brand'      => Brand::all(),
+            'cart'       => Cart::content(),
+            'total'      => Cart::total(),
+            'download'   => Download::limit(3)->offset(0)->get()
+        );
+
+        return view('front.detils',compact('data'));
     }
 
     public function hapus($id)
@@ -67,7 +82,8 @@ class MainController extends Controller
             'total'      => Cart::total(),
             'combo'      => $this->getCombo(),
             'jumlah'     => $this->getTotalBerat(),
-            'pengiriman' => $kirim
+            'pengiriman' => $kirim,
+            'download'   => Download::limit(3)->offset(0)->get()
         );
 
         return view('front.pengiriman',compact('data'));
@@ -122,7 +138,8 @@ class MainController extends Controller
             'form'       => Kami::all(),
             'brand'      => Brand::all(),
             'cart'       => Cart::content(),
-            'total'      => Cart::total()
+            'total'      => Cart::total(),
+            'download'   => Download::limit(3)->offset(0)->get()
         );
 
     	return view('front.testimoni',compact('data'));
@@ -176,7 +193,8 @@ class MainController extends Controller
         $data = array(
             'brand'      => Brand::all(),
             'cart'       => Cart::content(),
-            'total'      => Cart::total()
+            'total'      => Cart::total(),
+            'download'   => Download::limit(3)->offset(0)->get()
         );
 
         return view('front.konfirmasi',compact('data'));
@@ -188,7 +206,8 @@ class MainController extends Controller
             'kami'       => Kami::all()->first(),
             'brand'      => Brand::all(),
             'cart'       => Cart::content(),
-            'total'      => Cart::total()
+            'total'      => Cart::total(),
+            'download'   => Download::limit(3)->offset(0)->get()
         );
         
     	return view('front.kami',compact('data'));
@@ -202,7 +221,8 @@ class MainController extends Controller
             'brand'     => Brand::all(),
             'barang'    => Product::where('id_brand', $id)->orderBy('id_product', 'desc')->take(10)->get(),
             'cart'       => Cart::content(),
-            'total'      => Cart::total()
+            'total'      => Cart::total(),
+            'download'   => Download::limit(3)->offset(0)->get()
         );
         return view('front.detail',compact('data'));
     }
@@ -213,7 +233,8 @@ class MainController extends Controller
             'brand'     => Brand::all(),
             'barang'    => Product::all(),
             'cart'       => Cart::content(),
-            'total'      => Cart::total()
+            'total'      => Cart::total(),
+            'download'   => Download::limit(3)->offset(0)->get()
         );
         return view('front.product',compact('data'));
     }
@@ -252,7 +273,7 @@ class MainController extends Controller
         return $hasil;
     }
 
-    function getTotalBerat()
+    protected function getTotalBerat()
     {
         $jumlah = 0;
 
@@ -264,5 +285,10 @@ class MainController extends Controller
         }
 
         return $jumlah;
+    }
+
+    public function download($id)
+    {
+        return redirect('home');
     }
 }

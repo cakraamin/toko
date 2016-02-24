@@ -39,9 +39,23 @@ class KamiController extends Controller
         return redirect('admin/kami');
     }
 
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-    	echo "okelah";
+    	$kami = Kami::findOrFail($id);        
+
+        $data['deskripsi'] = $request->deskripsi;        
+
+        if ($request->hasFile('image')) {
+            $data['gambar_kami'] = $this->savePhoto($request->file('image'));
+        }        
+
+        if($kami->update($data)){
+            \Flash::success('Tentang Kami Berhasil Diupdate');
+        }else{
+            \Flash::info('Tentang Kami Gagal Diupdate');
+        }
+                
+        return redirect('admin/kami');
     }
 
     protected function savePhoto(UploadedFile $photo)
