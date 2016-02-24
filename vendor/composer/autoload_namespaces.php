@@ -16,4 +16,5 @@ return array(
     'Gloudemans\\Shoppingcart' => array($vendorDir . '/gloudemans/shoppingcart/src'),
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
     'Cron' => array($vendorDir . '/mtdowling/cron-expression/src'),
+    'Bcscoder\\Rajaongkir\\' => array($vendorDir . '/bcscoder/rajaongkir/src'),
 );
