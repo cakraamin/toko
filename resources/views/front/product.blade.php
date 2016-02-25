@@ -21,9 +21,14 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @endforeach                
                     @else
                         <div class="col-md-12">Maaf Kosong</div>
                     @endif                    
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {!! $data['barang']->links() !!}
+                    </div>
                 </div>
 @endsection            

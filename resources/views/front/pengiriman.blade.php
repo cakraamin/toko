@@ -3,13 +3,28 @@
 @section('content')
     {!! Breadcrumbs::render('pengiriman') !!}
     <script type="text/javascript">
+    function pakete(ID){
+        var nilai = $("#"+ID).val();
+        $("#biaya").val(nilai);
+    }
     function pilih(){
         var tujuan = $("#tujuan").val();
         var via = $("#via").val();
-        var jumlah = $("#jumlah").val();
-        $.get( "pilihan/"+tujuan+"/"+via+"/"+jumlah, function( data ) {
-            $("#pilihan").html(data);     
-        });
+        var jumlah = $("#jumlah").val();    
+        var hasil = "";    
+        $.ajax({
+          url: "pilihan/"+tujuan+"/"+via+"/"+jumlah,
+          beforeSend: function( xhr ) {            
+            $("#pilihan").html('<label class="col-md-4 control-label"></label><div class="col-md-6"><img src="{{ asset('img/loading.gif') }}"></div>');     
+          }
+        }).done(function( data ) { 
+            var itung = 1;               
+            data.forEach(function(entry) {
+                hasil = hasil + '<input type="radio" name="paket" value="'+entry["deskripsi"]+'" class="paket" onClick="pakete('+itung+')"> '+entry["deskripsi"]+' Rp '+entry["jumlah"]+' estimasi sampai tujuan '+entry["waktu"]+' hari<input type="hidden" id="'+itung+'" name="'+itung+'" value="'+entry["jumlah"]+'"/><br/>';
+                itung++;
+            });            
+            $("#pilihan").html('<label class="col-md-4 control-label">Paket</label><div class="col-md-6">'+hasil+'</div>');
+        });        
     }
     </script>
     <div class="row">
@@ -25,6 +40,7 @@
         <div class="col-md-12"><br/>                
             @if (count($data['cart']) > 0)                
                 {!! Form::open(['url' => 'pengiriman','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}
+                        <input type="hidden" name="biaya" id="biaya"/>
                         <div class="form-group">
                             <label class="col-md-4 control-label">Tujuan</label>
 
@@ -40,8 +56,7 @@
                             </div>
                         </div>
                         <div class="form-group" id="pilihan">
-                            
-                        </div>
+                        </div>                        
                         <div class="form-group">
                             <label class="col-md-4 control-label">Nama</label>
 
