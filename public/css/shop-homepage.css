@@ -40,6 +40,9 @@ body {
     color: #d17581;
     margin-bottom: 10px;
 }
+#pilihan img{
+  width: 50px;
+}
 
 .thumbnail {
     padding: 0;
@@ -132,7 +135,12 @@ img.tentang_kami{
   float: left;
   margin-right: 10px;
 }
-
+img.detail{
+  width: 280px;
+  padding: 5px;
+  border: solid 1px #999;
+  float: left;  
+}
 /*wizard*/
 .nav-pills.nav-wizard > li {
   position: relative;
