@@ -15,7 +15,9 @@ class Transaksi extends Model
         'email',
         'tujuan',
         'via',
-        'total'
+        'total',
+        'paket',
+        'ongkir'
     ];
 
     protected $primaryKey = 'id_transaksi';

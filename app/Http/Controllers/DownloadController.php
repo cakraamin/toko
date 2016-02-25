@@ -42,6 +42,7 @@ class DownloadController extends Controller
     {
         $this->validate($request, [
             'nama_download' => 'required|max:200',
+            'image'         => 'required',
         ]);        
 
         $data['nama_download'] = $request->nama_download;
@@ -92,6 +93,10 @@ class DownloadController extends Controller
      */
     public function update(Request $request, $id)
     {        
+        $this->validate($request, [
+            'nama_download' => 'required|max:200',
+        ]); 
+
         $down = Download::findOrFail($id);        
 
         $data['nama_download'] = $request->nama_download;        

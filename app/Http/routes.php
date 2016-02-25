@@ -43,6 +43,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/brand/{kode}/{judul}','MainController@brand');
     Route::get('order/{order}','MainController@order');
     Route::get('download/{download}','MainController@download');
+    Route::get('result/{result}','MainController@result');
 });
 
 Route::group(['middleware' => 'web'], function () {
