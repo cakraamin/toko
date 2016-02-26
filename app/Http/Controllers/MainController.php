@@ -30,7 +30,8 @@ class MainController extends Controller
             'product'    => Product::limit(9)->offset(0)->get(),
             'cart'       => Cart::content(),
             'total'      => Cart::total(),
-            'download'   => Download::limit(3)->offset(0)->get()
+            'download'   => Download::limit(3)->offset(0)->get(),
+            'testimoni'  => Testimoni::limit(10)->offset(0)->get(),
         );
 
     	return view('front.home',compact('data'));
@@ -42,7 +43,8 @@ class MainController extends Controller
             'brand'      => Brand::all(),
             'cart'       => Cart::content(),
             'total'      => Cart::total(),
-            'download'   => Download::limit(3)->offset(0)->get()
+            'download'   => Download::limit(3)->offset(0)->get(),
+            'testimoni'  => Testimoni::limit(10)->offset(0)->get(),
         );
 
     	return view('front.cart',compact('data'));
@@ -55,7 +57,8 @@ class MainController extends Controller
             'cart'       => Cart::content(),
             'total'      => Cart::total(),
             'barang'     => Product::getDetail($id),
-            'download'   => Download::limit(3)->offset(0)->get()
+            'download'   => Download::limit(3)->offset(0)->get(),
+            'testimoni'  => Testimoni::limit(10)->offset(0)->get(),
         );
 
         return view('front.detils',compact('data'));
@@ -84,7 +87,8 @@ class MainController extends Controller
             'combo'      => $this->getCombo(),
             'jumlah'     => $this->getTotalBerat(),
             'pengiriman' => $kirim,
-            'download'   => Download::limit(3)->offset(0)->get()
+            'download'   => Download::limit(3)->offset(0)->get(),
+            'testimoni'  => Testimoni::limit(10)->offset(0)->get(),
         );
 
         return view('front.pengiriman',compact('data'));
@@ -143,7 +147,8 @@ class MainController extends Controller
             'download'   => Download::limit(3)->offset(0)->get(),
             'barang'	 => $getTransaksi,
             'tujuan'	 => $tujuan,
-            'id'		 => $id
+            'id'		 => $id,
+            'testimoni'  => Testimoni::limit(10)->offset(0)->get(),
         );
 
     	return view('front.result',compact('data'));
@@ -193,7 +198,8 @@ class MainController extends Controller
             'brand'      => Brand::all(),
             'cart'       => Cart::content(),
             'total'      => Cart::total(),
-            'download'   => Download::limit(3)->offset(0)->get()
+            'download'   => Download::limit(3)->offset(0)->get(),
+            'testimoni'  => Testimoni::limit(10)->offset(0)->get(),
         );
 
     	return view('front.testimoni',compact('data'));
@@ -210,7 +216,7 @@ class MainController extends Controller
         $input = $request->all();        
         
         if(Testimoni::create($input)){
-            \Flash::success('Terima kaih');
+            \Flash::success('Terima kasih');
         }else{
             \Flash::info('Maaf Gagal');
         }
@@ -222,11 +228,14 @@ class MainController extends Controller
     {
         $this->validate($request, [
             'nama'              => 'required|max:100',
-            'email'             => 'required|max:100'
+            'email'             => 'required|max:100',
+            'image'             => 'required',
+            'kode_transaksi'    => 'required'
         ]);
 
         $data['nama'] = $request->nama;
         $data['email'] = $request->email;
+        $data['kode_transaksi'] = $request->kode_transaksi;
         $data['status'] = 0;
 
         if ($request->hasFile('image')) {
@@ -248,7 +257,8 @@ class MainController extends Controller
             'brand'      => Brand::all(),
             'cart'       => Cart::content(),
             'total'      => Cart::total(),
-            'download'   => Download::limit(3)->offset(0)->get()
+            'download'   => Download::limit(3)->offset(0)->get(),
+            'testimoni'  => Testimoni::limit(10)->offset(0)->get(),
         );
 
         return view('front.konfirmasi',compact('data'));
@@ -261,7 +271,8 @@ class MainController extends Controller
             'brand'      => Brand::all(),
             'cart'       => Cart::content(),
             'total'      => Cart::total(),
-            'download'   => Download::limit(3)->offset(0)->get()
+            'download'   => Download::limit(3)->offset(0)->get(),
+            'testimoni'  => Testimoni::limit(10)->offset(0)->get(),
         );
         
     	return view('front.kami',compact('data'));
@@ -277,7 +288,8 @@ class MainController extends Controller
             'barang'    => Product::where('id_brand', '=', $id)->paginate(15),
             'cart'       => Cart::content(),
             'total'      => Cart::total(),
-            'download'   => Download::limit(3)->offset(0)->get()
+            'download'   => Download::limit(3)->offset(0)->get(),
+            'testimoni'  => Testimoni::limit(10)->offset(0)->get(),
         );
         return view('front.detail',compact('data'));
     }
@@ -289,7 +301,8 @@ class MainController extends Controller
             'barang'    => Product::paginate(15),
             'cart'       => Cart::content(),
             'total'      => Cart::total(),
-            'download'   => Download::limit(3)->offset(0)->get()
+            'download'   => Download::limit(3)->offset(0)->get(),
+            'testimoni'  => Testimoni::limit(10)->offset(0)->get(),
         );
         return view('front.product',compact('data'));
     }

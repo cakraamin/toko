@@ -9,6 +9,7 @@ class Konfirmasi extends Model
     protected $fillable=[
         'nama',
         'email',
+        'kode_transaksi'
         'screen_shoot'        
     ];
 
