@@ -64,4 +64,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/admin/konfirmasi', 'KonfirmasiController@index');
     Route::get('/admin/konfirmasi/{konfirmasi}', 'KonfirmasiController@show');    
     Route::delete('/admin/konfirmasi/{konfirmasi}', ['as' => 'admin.konfirmasi.destroy', 'uses' => 'KonfirmasiController@destroy']);
+    Route::delete('/admin/transaksi/{transaksi}', ['as' => 'admin.transaksi.destroy', 'uses' => 'TransaksiController@destroy']);
+    Route::get('admin/transaksi/{transaksi}','TransaksiController@show');
 });
