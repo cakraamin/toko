@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{!! Form::model($data,['class' => 'form-horizontal','method' => 'PATCH','route'=>['admin.kami.update',$data->id_kami]]) !!}
+{!! Form::model($data,['class' => 'form-horizontal','method' => 'PATCH','route'=>['admin.kami.update',$data->id_kami],'files'=>true]) !!}
                         <div class="form-group">
                             <label class="col-md-4 control-label">Gambar Tentang Kami</label>
 
