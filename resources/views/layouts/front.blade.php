@@ -76,7 +76,7 @@
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">Kategori Product</p>
+                <p class="lead">Brand Product</p>
                 <div class="list-group">
                     @foreach ($data['brand'] as $brand)
                         <a href="{{ URL('brand/'.$brand->id_brand.'/'.str_slug($brand->nama_brand, '-')) }}" class="list-group-item">{{ $brand->nama_brand }}</a>
@@ -94,6 +94,28 @@
                     </div>
                 </div>
                 @endforeach
+                <p class="lead">Testimoni</p>
+                <div class="panel panel-default">                    
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <ul class="demo1">
+                                    @foreach($data['testimoni'] as $testimoni)
+                                        <li class="news-item">
+                                            <p>{{ $testimoni->nama }} <b>[{{ $testimoni->instansi }}]</b></p>
+                                            <p>{{ $testimoni->teks_testimoni }}</p>
+                                        </li>
+                                    @endforeach                                    
+                                </ul>
+                            </div>
+                           </div>
+                        </div>
+                    <div class="panel-footer"> </div>
+                </div>
+                <div id="contact">
+                    <a href=""><img src="{{ asset('img/yahoo.png') }}"> Cakra Aminuddin</a>
+                    <a href=""><img src="{{ asset('img/yahoo.png') }}"> Andi Prasetyo</a>
+                </div>  
             </div>
 
             <div class="col-md-9">
@@ -144,7 +166,20 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <script src="{{ asset('plugin/News/scripts/jquery.bootstrap.newsbox.min.js') }}" type="text/javascript"></script>
     <script type="text/javascript"> 
+    $(function () {
+        $(".demo1").bootstrapNews({
+            newsPerPage: 3,
+            autoplay: true,
+            pauseOnHover:true,
+            direction: 'up',
+            newsTickerInterval: 4000,
+            onToDo: function () {
+                //console.log(this);
+            }
+        });
+    });
     $(function(){   
         var scrolle = $(document).scrollTop();
         var headere = $('.headerman').outerHeight();

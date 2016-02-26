@@ -6,6 +6,20 @@
         <div class="col-md-12">
             {!! Form::open(['url' => 'konfirmasi','class' => 'form-horizontal','method' => 'POST','files'=>true]) !!}
                         <div class="form-group">
+                            <label class="col-md-4 control-label">Kode Transaksi</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="kode_transaksi">                                
+
+                                @if ($errors->has('kode_transaksi'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('kode_transaksi') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-md-4 control-label">Nama</label>
 
                             <div class="col-md-6">
@@ -39,9 +53,9 @@
                             <div class="col-md-6">
                                 {!! Form::file('image', null) !!}                              
 
-                                @if ($errors->has('screen_shoot'))
+                                @if ($errors->has('image'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('screen_shoot') }}</strong>
+                                        <strong>{{ $errors->first('image') }}</strong>
                                     </span>
                                 @endif
                             </div>
