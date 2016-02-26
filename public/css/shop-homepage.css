@@ -58,6 +58,29 @@ footer {
     margin: 50px 0;
 }
 
+ul.demo1{
+  margin: 0;
+  padding: 0;
+}
+ul.demo1 li{
+  list-style: none;
+  border-bottom: solid 2px #999;
+}
+
+#contact img{
+  width: 100px;
+}
+
+#contact a{
+  color: #000;
+  font-weight: bold;
+}
+
+#contact a:hover{
+  color: #000;
+  text-decoration: none;  
+}
+
 .demo {
         background: #f1da91 none repeat scroll 0 0;
         /*position: absolute;*/
